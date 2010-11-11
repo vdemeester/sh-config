@@ -1,0 +1,27 @@
+#!/bin/zsh
+# Keep it simple, keep it stupid
+#
+# List of « characters » :
+# ¶
+# ⊒
+# ⑂
+# ⑃
+# ⑄
+# ♐
+#    
+
+function prompt_char {
+    # git branch >/dev/null 2>/dev/null && echo 'ȣ' && return
+    # hg root >/dev/null 2>/dev/null && echo '☿' && return
+    git branch >/dev/null 2>/dev/null && echo '≡' && return
+    hg root >/dev/null 2>/dev/null && echo '♀' && return
+	echo '→'
+}
+
+setprompt () {
+	setopt prompt_subst
+
+	PROMPT='$(prompt_char) '
+}
+
+setprompt

@@ -1,0 +1,12 @@
+#!/bin/zsh
+#
+# zsh specifics
+
+# autoload
+autoload -U compinit
+compinit
+
+# history
+HISTFILE=~/.history
+HISTSIZE=300000
+SAVEHIST=300000
