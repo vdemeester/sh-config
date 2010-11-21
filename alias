@@ -19,3 +19,6 @@ alias vi="vim"
 alias gvim="gvim 2>/dev/null"
 
 alias luit="luit -x"
+
+# Arch related
+alias pacman="pacman-color"

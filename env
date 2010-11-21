@@ -1,1 +1,7 @@
 export ABSROOT=$HOME/src/arch/abs/
+# virtualenvwrapper working directory
+export WORKON_HOME=$HOME/srv/python-environments
+# pip options (aware of virtualenv)
+export PIP_VIRTUALENV_BASE=$WORKON_HOME
+export PIP_RESPECT_VIRTUALENV=true
+source /usr/bin/virtualenvwrapper.sh
