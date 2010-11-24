@@ -6,9 +6,4 @@ export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 source /usr/bin/virtualenvwrapper.sh
 
-# set some colors
-for COLOR in RED GREEN YELLOW WHITE BLACK CYAN; do
-	eval PR_$COLOR='%{$fg[${(L)COLOR}]%}'         
-    eval PR_BRIGHT_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
-done                                                 
-PR_RESET="%{${reset_color}%}";
+
