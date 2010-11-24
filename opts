@@ -6,6 +6,12 @@
 autoload -U compinit
 compinit
 
+autoload colors    
+colors 
+
+# ZSH built-in VCS (git, …) functions
+autoload -Uz vcs_info
+
 # history
 HISTFILE=~/.history
 HISTSIZE=300000
