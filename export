@@ -1,1 +1,1 @@
-export PATH=$PATH:/opt/maven/bin
+export PATH=$HOME/.bin:$PATH:/opt/maven/bin
