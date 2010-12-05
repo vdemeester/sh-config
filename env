@@ -4,6 +4,14 @@ export WORKON_HOME=$HOME/srv/python-environments
 # pip options (aware of virtualenv)
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
-source /usr/bin/virtualenvwrapper.sh
 
-
+if [[ -f /usr/bin/virtualenvwrapper.sh ]]; then
+	# Gentoo place it there
+	source /usr/bin/virtualenvwrapper.sh
+elif [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
+	# Mac OSX place it there and pip
+	source /usr/local/bin/virtualenvwrapper.sh
+elif [[ -f /etc/bash_completion.d/virtualenvwrapper ]]; then
+	# Ubuntu (debian ?) package place it there
+	source /etc/bash_completion.d/virtualenvwrapper
+fi
