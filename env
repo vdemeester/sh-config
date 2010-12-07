@@ -5,11 +5,17 @@ export WORKON_HOME=$HOME/srv/python-environments
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 
+# Is it a 256 color term ?
+if [[ "${COLORTERM}" == "gnome-terminal"  ]]; then
+	export TERM="xterm-256color"
+fi
+
 # Man with colors ?
 if [[ -f /usr/bin/most ]]; then
 	export MANPAGER="/usr/bin/most -s"
 fi
 
+# Virtual env
 if [[ -f /usr/bin/virtualenvwrapper.sh ]]; then
 	# Gentoo place it there
 	source /usr/bin/virtualenvwrapper.sh
