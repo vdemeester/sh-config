@@ -1,1 +1,12 @@
-export PATH=$HOME/.bin:$PATH:/opt/maven/bin
+NEW_PATH=$HOME/.bin:$PATH
+# Complete path
+# android-sdk
+if [[ -d /opt/android-sdk ]]; then
+	NEW_PATH=$NEW_PATH:/opt/android-sdk/tools
+	if [[ -d /opt/android-sdk/platform-tools ]]; then
+		NEW_PATH=$NEW_PATH:/opt/android-sdk/platform-tools
+	fi
+fi
+# Export it as the PATH
+export PATH=$NEW_PATH
+# vim:syntax=zsh
