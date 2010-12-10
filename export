@@ -1,5 +1,17 @@
-NEW_PATH=$HOME/.bin:$PATH
+NEW_PATH=$PATH
 # Complete path
+if [[ -d $HOME/.bin ]]; then
+	# Local bin is before PATH
+	NEW_PATH=$HOME/.bin:$NEW_PATH
+elif [[ -d $HOME/.local/bin ]]; then
+	NEW_PATH=$HOME/.local/bin:$NEW_PATH
+fi
+# opt install
+for opt in 'maven' 'ant' 'groovy'; do
+	if [[ -d "/opt/$opt" ]]; then
+		NEW_PATH=$NEW_PATH:/opt/$opt/bin
+	fi
+done
 # android-sdk
 if [[ -d /opt/android-sdk ]]; then
 	NEW_PATH=$NEW_PATH:/opt/android-sdk/tools
