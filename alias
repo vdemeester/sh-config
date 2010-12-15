@@ -15,10 +15,13 @@ alias tree="tree -C"
 
 alias rm="rm -i"
 
+# If gvim is present, alias it (with -v option) to support gui colorscheme
+if [[ -f /usr/bin/gvim ]]; then
+	alias vim="/usr/bin/gvim -v"
+fi
 alias vi="vim"
 alias gvim="gvim 2>/dev/null"
 
 alias luit="luit -x"
 
-# Arch related
-alias pacman="pacman-color"
+# vim:syntax=zsh
