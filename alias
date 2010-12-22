@@ -23,5 +23,8 @@ alias vi="vim"
 alias gvim="gvim 2>/dev/null"
 
 alias luit="luit -x"
-
+# For old servers
+alias ossh="TERM=xterm ssh"
+# Old ISO ssh servers
+alias oissh="TERM=xterm luit -x -encoding ISO-8859-15 ssh"
 # vim:syntax=zsh
