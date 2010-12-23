@@ -37,11 +37,12 @@ zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 setopt prompt_subst
 
 function precmd {       
-	    vcs_info 'prompt'          
+	    vcs_info 'prompt'
 }
 
 
 function lprompt {
+
 	local brackets=$1
 	local color1=$2
 	local color2=$3
@@ -73,5 +74,5 @@ function rprompt {
 	RPROMPT="${PR_RESET}${bracket_open}${inner}${bracket_close}${PR_RESET}"
 }
 
-lprompt '[]' $BR_BRIGHT_BLACK $PR_WHITE
-rprompt '()' $BR_BRIGHT_BLACK $PR_WHITE
+lprompt '()' $BR_BRIGHT_BLACK $PR_WHITE
+rprompt '<>' $BR_BRIGHT_BLACK $PR_WHITE

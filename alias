@@ -1,5 +1,10 @@
+# Aliases
 
-alias ls="ls --color" # Add colors by default
+if [[ $(uname) = 'Darwin' ]]; then
+	alias ls="ls -G"
+elif [[ $(uname) = 'Linux' ]]; then
+	alias ls="ls --color=always"
+fi
 alias ll="ls -l --group-directories-first"
 alias la="ls -a" # Show hidden files
 alias lx="ls -lXB" # Sort by extension
@@ -13,7 +18,10 @@ alias lt="ls -lt"
 
 alias tree="tree -C"
 
+# Safe "aliases"
 alias rm="rm -i"
+alias cp="cd -i"
+alias mv="mv -i"
 
 # If gvim is present, alias it (with -v option) to support gui colorscheme
 if [[ -f /usr/bin/gvim ]]; then
