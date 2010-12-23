@@ -20,7 +20,7 @@ alias tree="tree -C"
 
 # Safe "aliases"
 alias rm="rm -i"
-alias cp="cd -i"
+alias cp="cp -i"
 alias mv="mv -i"
 
 # If gvim is present, alias it (with -v option) to support gui colorscheme
