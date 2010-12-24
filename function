@@ -24,29 +24,13 @@ extract () {
 		echo "\`$1' is not a valid file"
 	fi
 }
-
-function __git_status_flag() {
-  git_status="$(git status 2> /dev/null)"
-  remote_pattern="^# Your branch is (.*) of"
-  diverge_pattern="# Your branch and (.*) have diverged"
-  if [[ ! ${git_status} =~ "working directory clean" ]]; then
-	state="⚡"
-    spacer=" "
-  fi
-
-  if [[ ${git_status} =~ ${remote_pattern} ]]; then
-    spacer=" "
-    if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
-	  remote="↑"
-    else
-	  remote="↓"
-    fi
-  fi
-
-  if [[ ${git_status} =~ ${diverge_pattern} ]]; then
-	  remote="↕"
-      spacer=" "
-  fi
-
-  echo "${state}${remote}${spacer}"
+# native function for showing 256 colors, properly formatted:
+function 256co() {
+	if [[ ${TERM} != linux ]]; then
+		for line in {0..15}; do for col in {0..15}; do
+			local code=$(( $col * 16 + ${line} ))
+			printf $'\e[38;05;%dm %03d' ${code} ${code}
+		done
+		print ; done
+	fi
 }
