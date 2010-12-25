@@ -27,7 +27,7 @@ fi
 if [ -z "$DISPLAY" ] && [ $(tty) = /dev/tty1 ]; then
 	while true
 	do
-		startx -- 2>&1 >> ~/.xsession.log
+		startx -- 2>&1 > ~/.xsession.log
 		sleep 10
 	done
 fi 
