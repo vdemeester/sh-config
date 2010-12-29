@@ -12,7 +12,7 @@ function start_agent {
 }
 
 # Source SSH settings, if applicable
-if [[ -f /usr/bin/keychain ]]; then
+if [[ -f /usr/bin/keychain || -f /usr/local/bin/keychain ]]; then
 	eval `keychain --eval id_rsa`
 elif [[ -f "${SSH_ENV}" ]]; then
      . ${SSH_ENV} > /dev/null

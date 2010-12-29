@@ -6,6 +6,13 @@ if [[ -d $HOME/.bin ]]; then
 elif [[ -d $HOME/.local/bin ]]; then
 	NEW_PATH=$HOME/.local/bin:$NEW_PATH
 fi
+if [[ -d /usr/local/bin ]]; then
+	NEW_PATH=/usr/local/bin:$NEW_PATH
+fi
+# Mac OS X hack
+if [[ -d /Library/Frameworks/Python.framework/Versions/2.7/bin ]]; then
+	NEW_PATH=/Library/Frameworks/Python.framework/Versions/2.7:$NEW_PATH
+fi
 # opt install
 for opt in 'maven' 'ant' 'groovy'; do
 	if [[ -d "/opt/$opt" ]]; then
