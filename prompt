@@ -73,6 +73,10 @@ function rprompt {
 
 	RPROMPT="${PR_RESET}${bracket_open}${inner}${bracket_close}${PR_RESET}"
 }
-
-lprompt '()' $BR_BRIGHT_BLACK $PR_WHITE
-rprompt '<>' $BR_BRIGHT_BLACK $PR_WHITE
+if [[ $(uname) == "Linux" ]]; then
+	lprompt '()' $BR_BRIGHT_BLACK $PR_WHITE
+	rprompt '<>' $BR_BRIGHT_BLACK $PR_WHITE
+elif [[ $(uname) == "Darwin" ]]; then
+	lprompt '()' $BR_GREEN $PR_BRIGHT_BLACK
+	rprompt '<>' $BR_GREEN $PR_BRIGHT_BLACK
+fi
