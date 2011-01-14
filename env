@@ -1,4 +1,6 @@
-export PYTHONPATH=/Library/Frameworks/Python.framework/Python
+if [[ $(uname) == 'Darwin' ]]; then
+	export PYTHONPATH=/Library/Frameworks/Python.framework/Python
+fi
 export ABSROOT=$HOME/src/arch/abs/
 # virtualenvwrapper working directory
 export WORKON_HOME=$HOME/srv/python-environments
