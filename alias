@@ -20,9 +20,9 @@ alias lt="ls -lt"
 alias tree="tree -C"
 
 # Safe "aliases"
-alias rm="rm -i"
-alias cp="cp -i"
-alias mv="mv -i"
+alias rmi="rm -i"
+alias cpi="cp -i"
+alias mvi="mv -i"
 
 alias vi="vim"
 alias gvim="gvim 2>/dev/null"
