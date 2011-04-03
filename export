@@ -1,4 +1,10 @@
-NEW_PATH=$PATH
+if [[ $(uname) == 'Darwin' ]]; then
+	# Ancien PATH
+	# PATH=/Library/Frameworks/Python.framework/Versions/2.7:/usr/local/bin:/Users/vincent/.bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/MacGPG2/bin:/usr/texbin:/usr/X11/bin
+	NEW_PATH=/bin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/usr/texbin:/usr/X11/bin
+else
+	NEW_PATH=$PATH
+fi
 # Complete path
 if [[ -d $HOME/.bin ]]; then
 	# Local bin is before PATH
@@ -6,13 +12,16 @@ if [[ -d $HOME/.bin ]]; then
 elif [[ -d $HOME/.local/bin ]]; then
 	NEW_PATH=$HOME/.local/bin:$NEW_PATH
 fi
+if [[ -d /usr/bin ]]; then
+	NEW_PATH=/usr/bin:$NEW_PATH
+fi
 if [[ -d /usr/local/bin ]]; then
 	NEW_PATH=/usr/local/bin:$NEW_PATH
 fi
 # Mac OS X hack
-if [[ -d /Library/Frameworks/Python.framework/Versions/2.7/bin ]]; then
-	NEW_PATH=/Library/Frameworks/Python.framework/Versions/2.7:$NEW_PATH
-fi
+#if [[ -d /Library/Frameworks/Python.framework/Versions/2.7/bin ]]; then
+#	NEW_PATH=/Library/Frameworks/Python.framework/Versions/2.7:$NEW_PATH
+#fi
 # opt install
 for opt in 'maven' 'ant' 'groovy'; do
 	if [[ -d "/opt/$opt" ]]; then

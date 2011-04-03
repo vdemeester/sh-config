@@ -1,6 +1,6 @@
-if [[ $(uname) == 'Darwin' ]]; then
-	export PYTHONPATH=/Library/Frameworks/Python.framework/Python
-fi
+#if [[ $(uname) == 'Darwin' ]]; then
+#	export PYTHONPATH=/Library/Frameworks/Python.framework/Python
+#fi
 export ABSROOT=$HOME/src/arch/abs/
 # virtualenvwrapper working directory
 export WORKON_HOME=$HOME/srv/python-environments
@@ -39,17 +39,18 @@ if [[ -f /usr/bin/most ]]; then
 fi
 
 # Virtual env
-if [[ -f /usr/bin/virtualenvwrapper.sh ]]; then
-	# Gentoo place it there
-	source /usr/bin/virtualenvwrapper.sh
-elif [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
-	# Mac OSX place it there and pip
-	source /usr/local/bin/virtualenvwrapper.sh
-elif [[ -f /Library/Frameworks/Python.framework/Versions/2.7/bin/virtualenvwrapper.sh ]]; then
-	# Mac OSX HACK
-	export VIRTUALENVWRAPPER_PYTHON=/Library/Frameworks/Python.framework/Versions/2.7/bin/python
-	source /Library/Frameworks/Python.framework/Versions/2.7/bin/virtualenvwrapper.sh
-elif [[ -f /etc/bash_completion.d/virtualenvwrapper ]]; then
-	# Ubuntu (debian ?) package place it there
-	source /etc/bash_completion.d/virtualenvwrapper
-fi
+# FIXME: Re-do...
+#if [[ -f /usr/bin/virtualenvwrapper.sh ]]; then
+#	# Gentoo place it there
+#	source /usr/bin/virtualenvwrapper.sh
+#elif [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
+#	# Mac OSX place it there and pip
+#	source /usr/local/bin/virtualenvwrapper.sh
+#elif [[ -f /Library/Frameworks/Python.framework/Versions/2.7/bin/virtualenvwrapper.sh ]]; then
+#	# Mac OSX HACK
+#	export VIRTUALENVWRAPPER_PYTHON=/Library/Frameworks/Python.framework/Versions/2.7/bin/python
+#	source /Library/Frameworks/Python.framework/Versions/2.7/bin/virtualenvwrapper.sh
+#elif [[ -f /etc/bash_completion.d/virtualenvwrapper ]]; then
+#	# Ubuntu (debian ?) package place it there
+#	source /etc/bash_completion.d/virtualenvwrapper
+#fi
