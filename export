@@ -37,4 +37,7 @@ if [[ -d /opt/android-sdk ]]; then
 fi
 # Export it as the PATH
 export PATH=$NEW_PATH
+if [[ -d /usr/local/lib/node ]]; then
+	export NODE_PATH=/usr/local/lib/node
+fi
 # vim:syntax=zsh
