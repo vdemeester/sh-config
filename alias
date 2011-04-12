@@ -2,11 +2,15 @@
 if [[ $(uname) = 'Darwin' ]]; then
 	alias ls="ls -G"
 	alias ll="ls -l"
-	alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
+	if [[ -f /Applications/MacVim.app/Contents/MacOs/Vim ]]; then
+		alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
+		alias gvim="/Applications/MacVim.app/Contents/MacOS/Vim -g"
+	fi
 elif [[ $(uname) = 'Linux' ]]; then
 	# ls
 	alias ls="ls --color=always"
 	alias ll="ls -l --group-directories-first"
+	alias gvim="gvim 2>/dev/null"
 fi
 alias la="ls -a" # Show hidden files
 alias lx="ls -lXB" # Sort by extension
@@ -26,7 +30,6 @@ alias cpi="cp -i"
 alias mvi="mv -i"
 
 alias vi="vim"
-alias gvim="gvim 2>/dev/null"
 
 alias luit="luit -x"
 # For old servers
