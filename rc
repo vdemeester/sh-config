@@ -29,4 +29,5 @@ fi
 . ~/.zsh/opts
 . ~/.zsh/export
 . ~/.zsh/alias
+. ~/.zsh/profiles # TODO: load from pattern
 . ~/.zsh/prompt
