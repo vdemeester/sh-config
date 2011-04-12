@@ -2,6 +2,7 @@
 if [[ $(uname) = 'Darwin' ]]; then
 	alias ls="ls -G"
 	alias ll="ls -l"
+	alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 elif [[ $(uname) = 'Linux' ]]; then
 	# ls
 	alias ls="ls --color=always"
