@@ -1,4 +1,10 @@
 # Aliases
+alias luit="luit -x"
+# For old servers
+alias ossh="TERM=xterm ssh"
+# Old ISO ssh servers
+alias oissh="TERM=xterm luit -x -encoding ISO-8859-15 ssh"
+
 if [[ $(uname) = 'Darwin' ]]; then
 	alias ls="ls -G"
 	alias ll="ls -l"
@@ -6,6 +12,9 @@ if [[ $(uname) = 'Darwin' ]]; then
 		alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 		alias gvim="/Applications/MacVim.app/Contents/MacOS/Vim -g"
 	fi
+	# -p is for handshake. This is needed on FreeBSD and Darwin
+	# to get it work right.
+	alias oissh="TERM=xterm luit -x -p -encoding ISO-8859-15 ssh"
 elif [[ $(uname) = 'Linux' ]]; then
 	# ls
 	alias ls="ls --color=always"
@@ -31,9 +40,4 @@ alias mvi="mv -i"
 
 alias vi="vim"
 
-alias luit="luit -x"
-# For old servers
-alias ossh="TERM=xterm ssh"
-# Old ISO ssh servers
-alias oissh="TERM=xterm luit -x -encoding ISO-8859-15 ssh"
 # vim:syntax=zsh
