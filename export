@@ -1,7 +1,7 @@
 if [[ $(uname) == 'Darwin' ]]; then
 	# Ancien PATH
 	# PATH=/Library/Frameworks/Python.framework/Versions/2.7:/usr/local/bin:/Users/vincent/.bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/MacGPG2/bin:/usr/texbin:/usr/X11/bin
-	NEW_PATH=/bin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/usr/texbin:/usr/X11/bin
+	NEW_PATH=/bin:/sbin:/usr/bin:/usr/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/usr/texbin:/usr/X11/bin
 else
 	NEW_PATH=$PATH
 fi
@@ -34,6 +34,10 @@ if [[ -d /opt/android-sdk ]]; then
 	if [[ -d /opt/android-sdk/platform-tools ]]; then
 		NEW_PATH=$NEW_PATH:/opt/android-sdk/platform-tools
 	fi
+fi
+# haskell/cabal
+if [[ -d $HOME/.cabal/bin ]]; then
+	NEW_PATH=$HOME/.cabal/bin:$NEW_PATH
 fi
 # Export it as the PATH
 export PATH=$NEW_PATH
