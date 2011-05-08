@@ -1,4 +1,8 @@
+#!/bin/zsh
 zstyle ":chpwd:profiles:${HOME}/src/nextep(|/|/*)"       profile nextep
+# cabal-dev enabled folder
+#zstyle ":chpwd:profiles:${HOME}/src/git/shortbrain.org(|/|/*)" profile cabaldev
+
 
 # configuration for profile 'nextep':
 chpwd_profile_nextep()
@@ -6,6 +10,14 @@ chpwd_profile_nextep()
   [[ ${profile} == ${CHPWD_PROFILE} ]] && return 1
   print "chpwd(): Switching to profile: $profile"
   export GIT_AUTHOR_EMAIL="vincent.demeester@nextep.net"
+}
+
+chpwd_profile_cabaldev()
+{
+	[[ ${profile} == ${CHPWD_PROFILE} ]] && return 1
+	print "chpwd(): Switching to profile : $profile"
+	alias cabal="~/.cabal/bin/cabal-dev"
+    unset GIT_AUTHOR_EMAIL
 }
 
 chpwd_profile_default()
