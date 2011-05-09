@@ -16,3 +16,5 @@ autoload -Uz vcs_info
 HISTFILE=~/.history
 HISTSIZE=300000
 SAVEHIST=300000
+
+source $HOME/.zsh/completion/git-flow-completion.zsh
