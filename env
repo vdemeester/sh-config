@@ -38,6 +38,16 @@ if [[ -f /usr/bin/most ]]; then
 	export MANPAGER="/usr/bin/most -s"
 fi
 
+# dircolors
+if [[ -d $HOME/.dircolors ]]; then
+	if [[ `hostname` = "gohei" || `hostname` = "kyushu" ]]; then
+		eval `dircolors $HOME/.dircolors/dircolors.256dark`
+	else
+		eval `dircolors $HOME/.dircolors/dircolors.ansi-dark`
+	fi
+fi
+
+
 # Virtual env
 # FIXME: Re-do...
 #if [[ -f /usr/bin/virtualenvwrapper.sh ]]; then
