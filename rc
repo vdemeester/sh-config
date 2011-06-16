@@ -1,5 +1,4 @@
 #!/bin/zsh
-
 # SSH agent(s)
 SSH_ENV=$HOME/.ssh/environment
 
@@ -31,3 +30,11 @@ fi
 . ~/.zsh/alias
 . ~/.zsh/profiles # TODO: load from pattern
 . ~/.zsh/prompt
+
+# Hostname custom configs (post "hook")
+if [[ -f $HOME/.zsh/$(hostname -d) ]]; then
+	source $HOME/.zsh/$(hostname -d)
+fi
+if [[ -f $HOME/.zsh/$(hostname -s) ]]; then
+	source $HOME/.zsh/$(hostname -s)
+fi
