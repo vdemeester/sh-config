@@ -1,11 +1,50 @@
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
 
+# First some hacking
+if [[ "${COLORTERM}" == "gnome-terminal"  ]]; then
+	if [[ -e /usr/share/terminfo/x/xterm-256color || -e /lib/terminfo/x/xterm-256color ]]; then
+		export TERM="xterm-256color"
+	else
+		export TERM='xterm-color'
+	fi
+elif [[ "${COLORTERM}" == "rxvt-xpm" ]]; then
+	if [[ "${TERM}" == "screen" ]]; then
+		if [[ -e /usr/share/terminfo/s/screen-256color ]]; then
+			export TERM="screen-256color"
+		fi
+	fi
+elif [[ "${TERM}" == "xterm" ]]; then
+	if [[ -e /usr/share/terminfo/x/xterm-256color || -e /lib/terminfo/x/xterm-256color ]]; then
+		export TERM="xterm-256color"
+	fi
+fi
+# OSX Hack
+if [[ $(uname) == 'Darwin' ]]; then
+	if [[ "${TERM}" == "xterm" ]]; then
+		export TERM="xterm-256color"
+	fi
+fi
+
+# Man with colors ?
+if [[ -f /usr/bin/most ]]; then
+	export MANPAGER="/usr/bin/most -s"
+fi
+
+# dircolors
+if [[ -d $HOME/.dircolors ]]; then
+	if [[ `hostname` = "gohei" || `hostname` = "kyushu" ]]; then
+		eval `dircolors $HOME/.dircolors/dircolors.256dark`
+	else
+		eval `dircolors $HOME/.dircolors/dircolors.ansi-dark`
+	fi
+fi
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-export ZSH_THEME="flazz"
+export ZSH_THEME="shortbrain"
 
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
@@ -26,3 +65,4 @@ plugins=(git git-flow github debian vi-mode ssh-agent gpg-agent pip)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
+source $HOME/.zsh/function
