@@ -50,7 +50,7 @@ fi
 
 # dircolors
 if [[ -d $HOME/.dircolors ]]; then
-	if [[ `hostname` = "gohei" || `hostname` = "kyushu" ]]; then
+	if [[ `hostname` = "gohei" || `hostname` = "kyushu" || `hostname` = "vinnsento" ]]; then
 		eval `dircolors $HOME/.dircolors/dircolors.256dark`
 	else
 		eval `dircolors $HOME/.dircolors/dircolors.ansi-dark`
@@ -83,5 +83,6 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 source $HOME/.zsh/function
+source $HOME/.zsh/alias
 
 # vim:syntax=zsh
