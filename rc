@@ -77,7 +77,7 @@ export ZSH_THEME="shortbrain"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow github debian vi-mode ssh-agent gpg-agent pip)
+plugins=(git git-flow github debian vi-mode pip)
 
 source $ZSH/oh-my-zsh.sh
 
