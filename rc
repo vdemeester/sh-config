@@ -1,5 +1,6 @@
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
+export TASKS_FOLDER=$HOME/src/git/tasks
 
 if [[ $(uname) == 'Darwin' ]]; then
 	# Ancien PATH

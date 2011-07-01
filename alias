@@ -40,4 +40,8 @@ alias mvi="mv -i"
 
 alias vi="vim"
 
+# t - todo for no brainer
+alias t="python $HOME/.bin/t.py --task-dir $TASKS_FOLDER --list default"
+alias s="python $HOME/.bin/t.py --task-dir $TASKS_FOLDER --list sites"
+
 # vim:syntax=zsh
