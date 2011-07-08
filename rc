@@ -1,5 +1,8 @@
 # Path to your oh-my-zsh configuration.
+export LANG=fr_FR.utf8
+export LC_MESSAGES=en_US.utf8
 export ZSH=$HOME/.oh-my-zsh
+export TASKS_FOLDER=$HOME/src/git/tasks
 
 if [[ $(uname) == 'Darwin' ]]; then
 	# Ancien PATH
@@ -77,7 +80,7 @@ export ZSH_THEME="shortbrain"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(ssh-agent git git-flow github debian vi-mode pip)
+plugins=(ssh-agent git git-flow debian vi-mode pip)
 
 source $ZSH/oh-my-zsh.sh
 
