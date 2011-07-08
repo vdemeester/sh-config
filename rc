@@ -4,7 +4,7 @@ export ZSH=$HOME/.oh-my-zsh
 if [[ $(uname) == 'Darwin' ]]; then
 	# Ancien PATH
 	# PATH=/Library/Frameworks/Python.framework/Versions/2.7:/usr/local/bin:/Users/vincent/.bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/MacGPG2/bin:/usr/texbin:/usr/X11/bin
-	NEW_PATH=/bin:/sbin:/usr/bin:/usr/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/usr/texbin:/usr/X11/bin
+	NEW_PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/usr/texbin:/usr/X11/bin
 else
 	NEW_PATH=$PATH
 fi
