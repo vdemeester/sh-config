@@ -19,6 +19,11 @@ elif [[ -d $HOME/.local/bin ]]; then
 	NEW_PATH=$HOME/.local/bin:$NEW_PATH
 fi
 
+# Cabal
+if [[ -d $HOME/.cabal/bin ]]; then
+    NEW_PATH=$HOME/.cabal/bin:$NEW_PATH
+fi
+
 export PATH=$NEW_PATH
 
 # First some hacking
