@@ -1,4 +1,8 @@
 # Path to your oh-my-zsh configuration.
+# Use /bin/sh when no terminal is present (?)
+[[ ${TERM:-dumb} != "dumb" ]] || exec /bin/sh
+[ -t 1 ] || exec /bin/sh
+
 export LANG=fr_FR.utf8
 export LC_MESSAGES=en_US.utf8
 export ZSH=$HOME/.zsh/oh-my-zsh

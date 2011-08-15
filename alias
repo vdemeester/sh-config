@@ -44,4 +44,14 @@ alias vi="vim"
 alias t="python $HOME/.local/bin/t.py --task-dir $TASKS_FOLDER --list default"
 alias s="python $HOME/.local/bin/t.py --task-dir $TASKS_FOLDER --list sites"
 
+# processes
+alias psa='ps auxwww'
+# pipe into grep to find a proc
+alias psg='psa | grep'
+
+alias lsofp='sudo lsof -p'
+
+# which show all versions of an executable
+alias whicha="which -a"
+
 # vim:syntax=zsh
