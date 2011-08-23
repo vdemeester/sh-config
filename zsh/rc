@@ -3,6 +3,10 @@
 [[ ${TERM:-dumb} != "dumb" ]] || exec /bin/sh
 [ -t 1 ] || exec /bin/sh
 
+if test -f $HOME/.shenv; then
+    . $HOME/.shenv
+fi
+
 export LANG=fr_FR.utf8
 export LC_MESSAGES=en_US.utf8
 export ZSH=$HOME/.zsh/oh-my-zsh
@@ -89,7 +93,7 @@ export ZSH_THEME="shortbrain"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(ssh-agent git git-flow debian vi-mode pip haskell)
+plugins=(git git-flow debian vi-mode pip haskell)
 
 source $ZSH/oh-my-zsh.sh
 

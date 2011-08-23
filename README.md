@@ -16,8 +16,11 @@ install zsh (or where I do not feel the need to install it), I'm using what's
 available, most of the time bash.
 This repository contains all my sh(es) configuration file (zsh, bash, ...).
 
-Notes
-=========
+## Basic information
+
+
+
+## Notes
 
 I've been a user of [oh-my-zsh][ohmyzsh] for few years now but I do agree with
 [Vincent Bernat][vincentbernat] : 
