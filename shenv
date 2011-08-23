@@ -1,7 +1,6 @@
-# shenv
-echo "shenv"
-
-# SSH agent(s)
+#!/bin/sh
+# vim:foldmethod=marker foldmarker={{{,}}} syntax=sh
+# SSH agent ------------------------------------------------------------------- {{{
 SSH_ENV=$HOME/.ssh/environment
 start_agent () {
     echo "Initialising new SSH agent..."
@@ -23,4 +22,13 @@ then
 else
     start_agent;
 fi
-
+# }}}
+# Local ----------------------------------------------------------------------- {{{
+# I am french but I like using my software in English :
+# We are going to set LANG=fr and LC_MESSAGES=en.
+# This way the local setting are french (currency, etc…) but the messages are 
+# in English.
+export LANG=fr_FR.utf8
+export LC_MESSAGES=en_US.utf8
+# FIXME LANGUAGE seems to be the same as LC_MESSAGES. to confirm.
+# }}}

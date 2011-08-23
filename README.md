@@ -18,7 +18,12 @@ This repository contains all my sh(es) configuration file (zsh, bash, ...).
 
 ## Basic information
 
+The idea is simple : Share the most thing between shells and try to be posix
+compliant on common file.
 
+* `$HOME/.shenv` is sourced by any shell (and at login via .profile). It contains the
+  ssh-agent initialization and env stuff.
+* Most of the alias are shared between shells.
 
 ## Notes
 
