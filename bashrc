@@ -1,4 +1,5 @@
 # bashrc file
+CSHELL="bash"
 # This file is sourced when starting bash.
 SH="${SHFOLDER:-$HOME}/.sh"
 # We are sourcing $HOME/.shenv at first and any time bash is launched, even it is
@@ -10,20 +11,8 @@ fi
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# Loading rc/ stuff
-for rcfile in ${SH}/rc/*.{sh,bash}
-do
-    . ${rcfile}
-done
+load_rcfiles
 
-# dircolors
-if [[ -d $HOME/.dircolors ]]; then
-	if [[ `hostname` = "gohei" || `hostname` = "kyushu" || `hostname` = "vinnsento" ]]; then
-		eval `dircolors $HOME/.dircolors/dircolors.256dark`
-	else
-		eval `dircolors $HOME/.dircolors/dircolors.ansi-dark`
-	fi
-fi
 HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
 HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it

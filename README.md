@@ -24,6 +24,10 @@ compliant on common file.
 * `$HOME/.shenv` is sourced by any shell (and at login via .profile). It contains the
   ssh-agent initialization and env stuff.
 * Most of the alias are shared between shells.
+* Loading common and specific stuff automigically :
+  * `*.sh` -> common (loaded by bash & zsh)
+  * `*.bash` -> only bash
+  * `*.zsh` -> only zsh
 
 ## Notes
 

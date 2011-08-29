@@ -32,3 +32,10 @@ export LANG=fr_FR.utf8
 export LC_MESSAGES=en_US.utf8
 # FIXME LANGUAGE seems to be the same as LC_MESSAGES. to confirm.
 # }}}
+# Load rc files function ------------------------------------------------------ {{{
+load_rcfiles () {
+    for rcfile in ${SH}/rc/*.{sh,${CSHELL}}; do
+        . ${rcfile}
+    done
+}
+# }}}
