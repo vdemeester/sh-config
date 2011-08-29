@@ -1,10 +1,11 @@
 # zshrc file
 # vim:foldmethod=marker foldmarker={{{,}}} syntax=zsh
 # Common part ----------------------------------------------------------------- {{{
+SH="${SHFOLDER:-$HOME}/.sh"
 # We are sourcing $HOME/.shenv at first and any time bash is launched, even it is
 # not in interactive mode.
-if test -f $HOME/.shenv; then
-    . $HOME/.shenv
+if test -f ${SH}/env; then
+    . ${SH}/env
 fi
 
 # Use /bin/sh when no terminal is present (?)
@@ -12,12 +13,12 @@ fi
 [ -t 1 ] || exec /bin/sh
 
 # Load exports
-if test -f $HOME/.sh/exports; then
-    . $HOME/.sh/exports
+if test -f ${SH}/exports; then
+    . ${SH}/exports
 fi
 # }}}
 
-export ZSH=$HOME/.zsh/oh-my-zsh
+export ZSH=${SH}/zsh/oh-my-zsh
 
 # dircolors
 if [[ -d $HOME/.dircolors ]]; then
@@ -53,7 +54,7 @@ plugins=(git git-flow debian vi-mode pip haskell)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-source $HOME/.zsh/function
-source $HOME/.zsh/alias
+source ${SH}/zsh/function
+source ${SH}/zsh/alias
 
 # vim:syntax=zsh
