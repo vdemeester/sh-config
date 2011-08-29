@@ -1,22 +1,21 @@
 # bashrc file
 # This file is sourced when starting bash.
-# vim:foldmethod=marker foldmarker={{{,}}} syntax=sh
-
-# Common part ----------------------------------------------------------------- {{{
+SH="${SHFOLDER:-$HOME}/.sh"
 # We are sourcing $HOME/.shenv at first and any time bash is launched, even it is
 # not in interactive mode.
-if test -f $HOME/.shenv; then
-    . $HOME/.shenv
+if test -f ${SH}/env; then
+    . ${SH}/env
 fi
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# Load exports
-if test -f $HOME/.sh/exports; then
-    . $HOME/.sh/exports
-fi
-# }}}
+# Loading rc/ stuff
+for rcfile in ${SH}/rc/*.{sh,bash}
+do
+    . ${rcfile}
+done
+
 # dircolors
 if [[ -d $HOME/.dircolors ]]; then
 	if [[ `hostname` = "gohei" || `hostname` = "kyushu" || `hostname` = "vinnsento" ]]; then
