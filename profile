@@ -8,15 +8,6 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-# Staring Xorg if we are on tty1
-if [ -z "$DISPLAY" ] && [ $(tty) = /dev/tty1 ]; then
-	while true
-	do
-		startx -- 2>&1 > ~/.xsession.log
-		sleep 10
-	done
-fi 
-
 # From man sh :
 # > If the environment variable ENV is set on entry to an interactive shell, or is
 # > set in the .profile of a login shell, the shell next reads commands from the
@@ -35,3 +26,14 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
+
+# Staring Xorg if we are on tty1
+if [ -z "$DISPLAY" ] && [ $(tty) = /dev/tty1 ]; then
+	while true
+	do
+		startx -- 2>&1 > ~/.xsession.log
+		sleep 10
+	done
+fi 
+
+
