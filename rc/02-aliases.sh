@@ -29,5 +29,7 @@ alias psg='psa | grep'
 
 alias lsofp='sudo lsof -p'
 
+alias tmux="tmux -2"
+
 # which show all versions of an executable
 alias whicha="which -a"
