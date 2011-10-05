@@ -1,6 +1,7 @@
 UNAME=$(uname)
 alias oissh="TERM=xterm luit -x -encoding ISO-8859-15 ssh"
 if test "${UNAME}" == "Darwin"; then
+    alias gvim="mvim" # for MacVim
     # -p is for handshake. This is needed on FreeBSD and Darwin
     # to get it work right.
     alias oissh="TERM=xterm luit -x -p -encoding ISO-8859-15 ssh"

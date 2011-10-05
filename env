@@ -9,18 +9,20 @@ start_agent () {
     . ${SSH_ENV} > /dev/null
     /usr/bin/ssh-add;
 }
-# Source SSH settings, if applicable
-if test -f /usr/bin/keychain || test -f /usr/local/bin/keychain
-then
-    eval `keychain --eval id_rsa`
-elif test -f "${SSH_ENV}"
-then
-    . ${SSH_ENV} > /dev/null
-    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent > /dev/null || {
+if test `id -u` != 0; then
+    # Source SSH settings, if applicable
+    if test -f /usr/bin/keychain || test -f /usr/local/bin/keychain || test -f /usr/pkg/bin/keychain
+    then
+        eval `keychain --eval id_rsa`
+    elif test -f "${SSH_ENV}"
+    then
+        . ${SSH_ENV} > /dev/null
+        ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent > /dev/null || {
+            start_agent;
+        }
+    else
         start_agent;
-    }
-else
-    start_agent;
+    fi
 fi
 # }}}
 # Local ----------------------------------------------------------------------- {{{

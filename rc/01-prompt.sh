@@ -31,7 +31,9 @@ lastcommanedfailed_prompt() {
 }
 
 vde_vcprompt() {
-    ${VCPROMPT} -f $'on \033[35m%n:%b \033[1;35m[%r]\n\033[32m%u%m\033[00m'
+    if ! test -z "${VCPROMPT}"; then
+        ${VCPROMPT} -f $'on \033[35m%n:%b \033[1;35m[%r]\n\033[32m%u%m\033[00m'
+    fi
 }
 
 export VDE_PROMPT='\e${USER_COLOR}\u \e${COLOR_DEFAULT}at \e${COLOR_BLUE}\h \
