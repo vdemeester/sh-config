@@ -3,11 +3,16 @@
 # SSH agent ------------------------------------------------------------------- {{{
 SSH_ENV=$HOME/.ssh/environment
 start_agent () {
-    echo "Initialising new SSH agent..."
-    /usr/bin/ssh-agent | sed 's/^echo/#echo/' >! ${SSH_ENV}
-    chmod 600 ${SSH_ENV}
-    . ${SSH_ENV} > /dev/null
-    /usr/bin/ssh-add;
+    # echo "Initialising new SSH agent..."
+    # /usr/bin/ssh-agent | sed 's/^echo/#echo/' >! ${SSH_ENV}
+    # chmod 600 ${SSH_ENV}
+    #. ${SSH_ENV} > /dev/null
+    if test -n "`ps -e|grep ssh-agent`"; then
+        echo ""
+    else
+        eval `ssh-agent`
+        /usr/bin/ssh-add;
+    fi
 }
 if test `id -u` != 0; then
     # Source SSH settings, if applicable
