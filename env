@@ -31,10 +31,16 @@ start_agent () {
     fi
 }
 if test `id -u` != 0; then
+    KEYCHAIN="/usr/bin/keychain"
+    if test -f /usr/local/bin/keychain; then
+        KEYCHAIN="/usr/local/bin/keychain"
+    elif test -f /usr/pkg/bin/keychain; then
+        KEYCHAIN="/usr/pkg/bin/keychain"
+    fi
     # Source SSH settings, if applicable
-    if test -f /usr/bin/keychain || test -f /usr/local/bin/keychain || test -f /usr/pkg/bin/keychain
+    if test -x "${KEYCHAIN}"
     then
-        eval `keychain --eval id_rsa`
+        eval `${KEYCHAIN} --eval id_rsa`
     elif test -f "${SSH_ENV}"
     then
         . ${SSH_ENV} > /dev/null
