@@ -15,6 +15,13 @@ if ! test -z "${LOCAL_CABAL_DISABLE}"; then
         NEW_PATH=$HOME/.cabal/bin:$NEW_PATH
     fi
 fi
+# pkgsrc (macosx & co) -> /usr/pkg
+if test -d /usr/pkg/bin; then
+    NEW_PATH=/usr/pkg/bin:$NEW_PATH
+fi
+if test -d /usr/pkg/sbin; then
+    NEW_PATH=/usr/pkg/sbin:$NEW_PATH
+fi
 # $HOME/.local/bin have to be *first* in the PATH
 if test -d $HOME/.local/bin; then
     NEW_PATH=$HOME/.local/bin:$NEW_PATH
