@@ -1,5 +1,21 @@
 #!/bin/sh
 # vim:foldmethod=marker foldmarker={{{,}}} syntax=sh
+# Local ----------------------------------------------------------------------- {{{
+# I am french but I like using my software in English :
+# We are going to set LANG=fr and LC_MESSAGES=en.
+# This way the local setting are french (currency, etc…) but the messages are 
+# in English.
+export LANG=fr_FR.utf8
+export LC_MESSAGES=en_US.utf8
+# FIXME LANGUAGE seems to be the same as LC_MESSAGES. to confirm.
+# }}}
+# Load rc files function ------------------------------------------------------ {{{
+load_rcfiles () {
+    for rcfile in ${SH}/rc/*.{sh,${CSHELL}}; do
+        . ${rcfile}
+    done
+}
+# }}}
 # SSH agent ------------------------------------------------------------------- {{{
 SSH_ENV=$HOME/.ssh/environment
 start_agent () {
@@ -30,19 +46,4 @@ if test `id -u` != 0; then
     fi
 fi
 # }}}
-# Local ----------------------------------------------------------------------- {{{
-# I am french but I like using my software in English :
-# We are going to set LANG=fr and LC_MESSAGES=en.
-# This way the local setting are french (currency, etc…) but the messages are 
-# in English.
-export LANG=fr_FR.utf8
-export LC_MESSAGES=en_US.utf8
-# FIXME LANGUAGE seems to be the same as LC_MESSAGES. to confirm.
-# }}}
-# Load rc files function ------------------------------------------------------ {{{
-load_rcfiles () {
-    for rcfile in ${SH}/rc/*.{sh,${CSHELL}}; do
-        . ${rcfile}
-    done
-}
-# }}}
+
