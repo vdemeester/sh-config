@@ -14,6 +14,10 @@ COLOR_YELLOW="[33m"
 COLOR_MAGENTA="[35m"
 COLOR_VIOLET="[1;35m"
 
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
 if test `id -u` == 0; then
     USER_COLOR=$COLOR_RED
 else
@@ -36,7 +40,8 @@ vde_vcprompt() {
     fi
 }
 
-export VDE_PROMPT='\e${USER_COLOR}\u \e${COLOR_DEFAULT}at \e${COLOR_BLUE}\h \
+export VDE_PROMPT='\e${USER_COLOR}\u \e${COLOR_DEFAULT}at \e${COLOR_BLUE}\h\
+\e${COLOR_VIOLET}:${debian_chroot} \
 \e${COLOR_DEFAULT}in \e${COLOR_YELLOW}\w\e${COLOR_DEFAULT} \
 `lastcommanedfailed_prompt`\
 `vde_vcprompt`\
