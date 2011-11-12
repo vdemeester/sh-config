@@ -68,4 +68,6 @@ command -v most >/dev/null && {
 # }}}
 # Miscellaneous --------------------------------------------------------------- {{{
 export TASKS_FOLDER=$HOME/src/git/tasks
+# Openoffice
+OOO_FORCE_DESKTOP=kde4
 # }}}

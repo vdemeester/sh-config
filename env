@@ -42,7 +42,7 @@ if test `id -u` != 0; then
     # Source SSH settings, if applicable
     if test -x "${KEYCHAIN}"
     then
-        eval `${KEYCHAIN} --eval id_rsa`
+        eval `${KEYCHAIN} --eval id_rsa --quiet`
     elif test -f "${SSH_ENV}"
     then
         . ${SSH_ENV} > /dev/null
