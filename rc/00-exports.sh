@@ -10,7 +10,7 @@ if test $(uname) = "Darwin"; then
     NEW_PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/usr/texbin:/usr/X11/bin
 fi
 # Test if LOCAL_CABAL_DISABLE is set or not. If set, no $HOME/.cabal/bin in PATH
-if ! test -z "${LOCAL_CABAL_DISABLE}"; then
+if test -z "${LOCAL_CABAL_DISABLE}"; then
     if test -d $HOME/.cabal/bin; then
         NEW_PATH=$HOME/.cabal/bin:$NEW_PATH
     fi
