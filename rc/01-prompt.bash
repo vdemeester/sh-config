@@ -21,4 +21,4 @@ host="$(tput setaf 4)"
 git_ps1="$(tput setaf 3)"
 git_hash="$(tput bold; tput setaf 0)"
 
-PS1='${debian_chroot:+${chroot}($debian_chroot)${reset}} ${user_color}\u${reset}${host}@\h${reset}:\w $(__git_ps1 "\n${git_ps1}[%s${reset}${git_hash}($(__git_hash))${git_ps1}] ")${reset}\$ '
+PS1='${debian_chroot:+${chroot}($debian_chroot)${reset} }${user_color}\u${reset}${host}@\h${reset}:\w $(__git_ps1 "\n${git_ps1}[%s${reset}${git_hash}($(__git_hash))${git_ps1}] ")${reset}\$ '
