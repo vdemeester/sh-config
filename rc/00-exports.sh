@@ -26,6 +26,9 @@ fi
 if test -d $HOME/.local/bin; then
     NEW_PATH=$HOME/.local/bin:$NEW_PATH
 fi
+# root stuff
+NEW_PATH=$NEW_PATH:/sbin:/usr/sbin:/usr/local/sbin
+
 export PATH=$NEW_PATH
 }
 build_path
