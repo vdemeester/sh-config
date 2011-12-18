@@ -7,7 +7,6 @@
 # the default umask is set in /etc/profile; for setting the umask
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
-
 # From man sh :
 # > If the environment variable ENV is set on entry to an interactive shell, or is
 # > set in the .profile of a login shell, the shell next reads commands from the
