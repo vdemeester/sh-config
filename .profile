@@ -26,11 +26,16 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+# init me !
+if [ ! -d $HOME/.local/logs ]; then
+    mkdir -p $HOME/.local/logs
+fi
+
 # Staring Xorg if we are on tty1
 if [ -z "$DISPLAY" ] && [ $(tty) = /dev/tty1 ]; then
 	while true
 	do
-		startx -- 2>&1 > ~/.xsession.log
+		startx > $HOME/.local/logs/.xsession.log 2>&1
 		sleep 10
 	done
 fi 
