@@ -26,6 +26,11 @@ fi
 if test -d $HOME/.local/bin; then
     NEW_PATH=$HOME/.local/bin:$NEW_PATH
 fi
+for pluginpathfile in ${SH}/plugins/*.path.{sh,${CSHELL}}; do
+    . ${pluginpathfile}
+    NEW_PATH=$NEW_PATH:$PLUGIN_PATH
+    unset PLUGIN_PATH
+done
 # root stuff
 NEW_PATH=$NEW_PATH:/sbin:/usr/sbin:/usr/local/sbin
 
