@@ -34,3 +34,11 @@ alias tmux="tmux -2"
 
 # which show all versions of an executable
 alias whicha="which -a"
+
+# man -> vim if present
+vman () {
+    man $* | col -bp | iconv -c | vim -c 'set ft=man nomod nolist' -
+}
+command -v vim 1>/dev/null && {
+    alias man='vman'
+}
