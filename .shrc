@@ -1,0 +1,15 @@
+# Filename:     .shrc
+# Authors:      Vincent Demeester
+# License:      This file is licensed under the GPL v2.
+# --------------------------------------------------------------------------- #
+# This file is sourced only for interactive shells. This is the common rc files
+# that should work with any posix compliant shell.
+# --------------------------------------------------------------------------- #
+
+# Allow disabling of entire environment suite
+test -n "$INHERIT_ENV" && return 0
+test -n "$shared_rc_loaded" && return 0
+
+shared_env_loaded=y
+# vim:filetype=sh foldmethod=marker autoindent expandtab shiftwidth=4
+
