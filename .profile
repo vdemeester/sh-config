@@ -14,13 +14,13 @@
 test -n "$INHERIT_ENV" && return 0
 test -n "$profile_loaded" && return 0
 
+sh_load_status .profile
+
 # init me !
 # FIXME This should go elsewhere (in hooks probably)
 if [ ! -d $HOME/.local/logs ]; then
     mkdir -p $HOME/.local/logs
 fi
-
-sh_load_status .profile
 
 . $ZDOT_RUN_HOOKS .profile.d
 

@@ -11,6 +11,10 @@ test -n "$INHERIT_ENV" && return 0
 
 sh_load_status .zlogout
 
+[[ -e $zdotdir/.shlogout ]] && . $zdotdir/.shlogout
+
+. $ZDOT_RUN_HOOKS .zlogout.d
+
 # make sure screen is empty on exit
 clear
 

@@ -11,12 +11,10 @@
 # Allow disabling of entire environment suite
 test -n "$INHERIT_ENV" && return 0
 
-# {{{ Keychain -------------------------------------------------------------- #
-command -v keychain && {
-    eval $(keychain --eval --inherit any-once --quick --quiet)
-}
-# }}}
-
 sh_load_status .zlogin
+
+[[ -e $zdotdir/.shlogin ]] && . $zdotdir/.shlogin
+
+. $ZDOT_RUN_HOOKS .zlogin.d
 
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4

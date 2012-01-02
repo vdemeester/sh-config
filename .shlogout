@@ -1,18 +1,18 @@
-# Filename:     .shrc
+# Filename:     .shlogout
 # Authors:      Vincent Demeester
 # License:      This file is licensed under the GPL v2.
 # --------------------------------------------------------------------------- #
-# This file is sourced only for interactive shells. This is the common rc files
-# that should work with any posix compliant shell.
+# This file is sourced only for logout shells.
+#
 # --------------------------------------------------------------------------- #
-
 # Allow disabling of entire environment suite
 test -n "$INHERIT_ENV" && return 0
-test -n "$shrc_loaded" && return 0
+test -n "$shlogout_loaded" && return 0
 
-# Load shrc hooks (if present)
-. $ZDOT_RUN_HOOKS .shrc.d
+sh_load_status .shlogout
 
-shrc_loaded=y
-# vim:filetype=sh foldmethod=marker autoindent expandtab shiftwidth=4
+. $ZDOT_RUN_HOOKS .shlogout.d
+
+shlogout_loaded=y
+# vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4
 

@@ -9,7 +9,7 @@
 
 # Allow disabling of entire environment suite
 test -n "$INHERIT_ENV" && return 0
-test -n "$shared_env_loaded" && return 0
+test -n "$shenv_loaded" && return 0
 
 # {{{ Are we interactive ? ---------------------------------------------------
 case "$-" in
@@ -142,12 +142,8 @@ test -z "$BROWSER" && command -v firefox >/dev/null && {
     export BROWSER=firefox
 }
 # }}}
-# Load shared_env hooks (if present)
-. $ZDOT_RUN_HOOKS .shared_env.d
+# Load shenv hooks (if present)
+. $ZDOT_RUN_HOOKS .shenv.d
 
-if test -n "$shell_interactive"; then
-    . $ZDOTDIR/.shrc
-fi
-
-shared_env_loaded=y
+shenv_loaded=y
 # vim:filetype=sh foldmethod=marker autoindent expandtab shiftwidth=4

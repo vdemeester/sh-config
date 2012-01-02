@@ -16,4 +16,9 @@ test -n "$INHERIT_ENV" && return 0
 
 sh_load_status .zshrc
 
+[[ -e $zdotdir/.shrc ]] && . $zdotdir/.shrc
+
+# Load zshrc.d
+. $ZDOT_RUN_HOOKS .zshrc.d
+
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4

@@ -1,0 +1,35 @@
+# Filename:     .shlogin
+# Authors:      Vincent Demeester
+# License:      This file is licensed under the GPL v2.
+# --------------------------------------------------------------------------- #
+# This file is sourced only for login shells. It should contain commands that 
+# should be executed in login shells. This is the common one, should be called
+# from .zlogin or .bashrc (?)
+#
+# --------------------------------------------------------------------------- #
+# Allow disabling of entire environment suite
+test -n "$INHERIT_ENV" && return 0
+test -n "$shlogin_loaded" && return 0
+
+# {{{ Keychain -------------------------------------------------------------- #
+command -v keychain >/dev/null && {
+    eval $(keychain --eval --inherit any-once --quick --quiet)
+}
+# }}}
+# {{{ xorg start onn tty1 ----------------------------------------------------
+if [ -z "$DISPLAY" ] && [ $(tty) = /dev/tty1 ]; then
+    while true
+    do
+        startx > $HOME/.local/logs/.xsession.log 2>&1
+        sleep 10
+    done
+fi
+# }}}
+
+sh_load_status .shlogin
+
+. $ZDOT_RUN_HOOKS .shlogin.d
+
+shlogin_loaded=y
+# vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4
+
