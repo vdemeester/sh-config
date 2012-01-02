@@ -92,6 +92,7 @@ if ! test -e $syspath; then
 fi
 # Setting a fairly portable PATH
 PATH=/usr/local/bin:/usr/X11R6/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/games:/usr/games
+# The PATH might be completed by $ZDOTDIR/.shared_env.d hooks.
 # }}}
 # {{{ LANG -------------------------------------------------------------------
 # I am french but I like using my software in English :
@@ -105,7 +106,20 @@ fi
 # FIXME LANGUAGE seems to be the same as LC_MESSAGES. to confirm.
 # FIXME What about darwin stuff ?
 # }}}
-
+# {{{ EDITOR and common main env. var. ---------------------------------------
+# vim is my EDITOR of choice
+command -v vim >/dev/null && {
+    export EDITOR=vim
+}
+# Prefer iceweasel as browser
+command -v iceweasel >/dev/null && {
+    export BROWSER=iceweasel
+}
+# But if not present, prefer firefox (Ubuntu for ex.)
+test -z "$BROWSER" && command -v firefox >/dev/null && {
+    export BROWSER=firefox
+}
+# }}}
 # Load shared_env hooks (if present)
 . $ZDOT_RUN_HOOKS .shared_env.d
 
