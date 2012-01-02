@@ -3,6 +3,8 @@
 !.profile
 !.sh
 !.sh/*
+!.sh/functions/
+!.sh/functions/*
 !.shenv
 !.zlogin
 !.zlogout
