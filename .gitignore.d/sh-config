@@ -1,0 +1,13 @@
+*
+!.bashrc
+!.profile
+!.sh
+!.sh/*
+!.shenv
+!.zlogin
+!.zlogout
+!.zshenv
+!.zprofile
+!.zshrc
+!.gitignore.d
+!.gitignore.d/sh-config
