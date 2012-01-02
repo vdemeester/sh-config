@@ -35,4 +35,7 @@ typeset -U path
 typeset -U manpath
 export MANPATH
 # }}}
+# Load shared_env hooks (if present)
+. $ZDOT_RUN_HOOKS .zsh_env.d
+
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4
