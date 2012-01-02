@@ -11,7 +11,15 @@
 #
 # Order : .zshenv (-> .shenv), .zprofile, .zshrc, .zlogin
 # --------------------------------------------------------------------------- #
-# }}}
-echo ".zshenv"
+# Allow disabling of entire environment suite
+test -n "$INHERIT_ENV" && return 0
 
+# {{{ zdotdir ----------------------------------------------------------------
+zdotdir=${ZDOTDIR:-$HOME}
+export ZDOTDIR="${zdotdir}"
+# }}}
+
+[[ -e $zdotdir/.shenv ]] && . $zdotdir/.shenv
+
+sh_load_status ".zshenv already started before .shenv"
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4

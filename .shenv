@@ -1,6 +1,99 @@
-#!/bin/sh
-# vim:foldmethod=marker foldmarker={{{,}}} syntax=sh
-# Local ----------------------------------------------------------------------- {{{
+# Filename:     .shenv
+# Authors:      Vincent Demeester
+# License:      This file is licensed under the GPL v2.
+# --------------------------------------------------------------------------- #
+# This file should be sourced on all invocations of "any" posix shell 
+# (for $USER). It has to be sourced by .zshenv and similar. It should be kept
+# as fast and as portable as possible.
+# --------------------------------------------------------------------------- #
+
+# Allow disabling of entire environment suite
+test -n "$INHERIT_ENV" && return 0
+test -n "$shared_env_loaded" && return 0
+
+# {{{ Are we interactive ? ---------------------------------------------------
+case "$-" in
+    *i*) shell_interactive=y ;;
+      *) shell_interactive=  ;;
+esac
+# }}}
+# {{{ Loading status ---------------------------------------------------------
+# Default to 1, and treat empty as 0.  This ensures we have an integer.
+: ${DEBUG_LOCAL_HOOKS=1}
+: ${DEBUG_LOCAL_HOOKS:=0}
+
+sh_load_status () {
+  # Find the name of the running shell
+  _this_shell=${shell:-${0##*/}}
+
+  # Find the filename of the running script
+  if [ -n "$BASH_SOURCE" ]; then
+    _this_script="${BASH_SOURCE[0]}"
+    # Deduct 1 because array starts at 0, and another 1 because
+    # we want to ignore this stack frame (inside sh_load_status)
+    _this_script="${BASH_SOURCE[$(( ${#BASH_SOURCE[@]} - 2))]}"
+    # Sheesh.  $ZSH_SOURCE[-2], anyone?
+  else
+    _this_script="$0"
+    # Unfortunately in zsh there seems to be no way of determining
+    # the currently running file if a function is being run, unless
+    # function_argzero is unset :-/
+    [ "$_this_script" = sh_load_status ] && _this_script=
+    [ "$_this_script" = -zsh ] && _this_script=
+  fi
+  [ -n "$_this_script" ] && _this_script="[$_this_script]"
+
+  # Leave status printed?
+  
+  if [ "$DEBUG_LOCAL_HOOKS" -ge 2 ]; then
+    debug="\n"
+  fi
+  
+  # \e[0K is clear to right
+  if [ -n "$shell_interactive" ] && [ "$TERM" != 'dumb' ]; then
+    _text="${_this_shell}${_this_script}: $*... "
+    _text="${_text//\/home\//~}"
+    echo -e -n "\r\e[0K$_text$debug"
+  fi
+}
+# }}}
+sh_load_status .shenv
+
+# {{{ ZDOTDIR / …
+# Set several Z* environment variable to automagically load stuff later.
+zdotdir=${ZDOTDIR:-$HOME}
+ZDOTDIR="$zdotdir"
+ZDOT_RUN_HOOKS="$ZDOTDIR/.sh/functions/run_hooks"
+ZDOT_FIND_HOOKS="$ZDOTDIR/.sh/functions/find_hooks"
+export ZDOTDIR ZDOT_RUN_HOOKS ZDOT_FIND_HOOKS
+
+# Define a search path to be used by run_hooks
+if test "$ZDOTDIR" = "$HOME"; then
+    ZDOTDIRPATH=$ZDOTDIR
+    ZDOTDIRREVPATH=$ZDOTDIR
+else
+    # Include HOME in ZDOTDIR
+    ZDOTDIRPATH="$ZDOTDIR $HOME"
+    ZDOTDIRREVPATH="$HOME $ZDOTDIR"
+fi
+# }}}
+# {{{ USER / USERNAME --------------------------------------------------------
+# zsh sets USERNAME, GROUPS and E?[UG]ID
+# bash only sets E?UID
+USER=${USERNAME:-`id -un`}
+: ${USERNAME:=$USER}
+export USER USERNAME
+# }}}
+# {{{ PATH -------------------------------------------------------------------
+# Save system-wid PATH for reference, but should we trust it ?
+syspath=$HOME/.syspath.$HOST
+if ! test -e $syspath; then
+    echo "$PATH" 2>/dev/null > "$syspath"
+fi
+# Setting a fairly portable PATH
+PATH=/usr/local/bin:/usr/X11R6/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/games:/usr/games
+# }}}
+# {{{ LANG -------------------------------------------------------------------
 # I am french but I like using my software in English :
 # We are going to set LANG=fr and LC_MESSAGES=en.
 # This way the local setting are french (currency, etc…) but the messages are 
@@ -10,48 +103,6 @@ if test "$(uname)" != "Darwin"; then
     export LC_MESSAGES=en_US.utf8
 fi
 # FIXME LANGUAGE seems to be the same as LC_MESSAGES. to confirm.
+# FIXME What about darwin stuff ?
 # }}}
-# Load rc files function ------------------------------------------------------ {{{
-load_rcfiles () {
-    for rcfile in ${SH}/rc/*.{sh,${CSHELL}}; do
-        . ${rcfile}
-    done
-}
-# }}}
-# SSH agent ------------------------------------------------------------------- {{{
-SSH_ENV=$HOME/.ssh/environment
-start_agent () {
-    # echo "Initialising new SSH agent..."
-    # /usr/bin/ssh-agent | sed 's/^echo/#echo/' >! ${SSH_ENV}
-    # chmod 600 ${SSH_ENV}
-    #. ${SSH_ENV} > /dev/null
-    if test -n "`ps -e|grep ssh-agent`"; then
-        echo ""
-    else
-        eval `ssh-agent`
-        /usr/bin/ssh-add;
-    fi
-}
-if test `id -u` != 0; then
-    KEYCHAIN="/usr/bin/keychain"
-    if test -f /usr/local/bin/keychain; then
-        KEYCHAIN="/usr/local/bin/keychain"
-    elif test -f /usr/pkg/bin/keychain; then
-        KEYCHAIN="/usr/pkg/bin/keychain"
-    fi
-    # Source SSH settings, if applicable
-    if test -x "${KEYCHAIN}"
-    then
-        eval `${KEYCHAIN} --eval id_rsa --quiet`
-    elif test -f "${SSH_ENV}"
-    then
-        . ${SSH_ENV} > /dev/null
-        ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent > /dev/null || {
-            start_agent;
-        }
-    else
-        start_agent;
-    fi
-fi
-# }}}
-
+# vim:filetype=sh foldmethod=marker autoindent expandtab shiftwidth=4

@@ -1,0 +1,228 @@
+#autoload
+
+# NOTE!  This file not only gets used by zsh, but by
+# .shared_env, and so has to work when source'd from
+# any sh-compatible shell.  Well, any sensible sh.
+
+# The design and implementation of the below code is complex.
+# See ConfigHooks.org for details.
+
+# Default to 1, and treat empty as 0.  This ensures we have an integer.
+: ${DEBUG_LOCAL_HOOKS=1}
+: ${DEBUG_LOCAL_HOOKS:=0}
+
+process_hook () {
+  hook_path="$1"
+
+  if ! [ -r "$hook_path" ]; then
+    if [ "$DEBUG_LOCAL_HOOKS" -ge 2 ]; then
+      echo "Couldn't read $hook_path; skipping." >&2
+    fi
+    return 0
+  fi
+  
+  if [ -z "$hooks_found" ]; then
+    hooks_found="$hook_path"
+  else
+    hooks_found="$hooks_found $hook_path"
+  fi
+
+  case "$action" in
+    source)
+      [ "$DEBUG_LOCAL_HOOKS" -gt 0 ] && sh_load_status "$hook_path"
+      source "$hook_path"
+      ;;
+    find)
+      ;;
+    *)
+      echo "Unrecognised run_hooks action $action; aborting." >&2
+      return 1
+  esac
+
+  return 0
+}
+
+should_ignore () {
+  dirent="$1"
+  ignore=
+  case "$dirent" in
+    *.dis)      ignore=y ;;
+    *.disable)  ignore=y ;;
+    *.disabled) ignore=y ;;
+    *~)         ignore=y ;;
+    *.d)        ignore=y ;;
+    *.orig)     ignore=y ;;
+    *.zwc)      ignore=y ;;
+    *.zwc.*)    ignore=y ;;
+    \#*\#)      ignore=y ;;
+    CVS)        ignore=y ;;
+    */CVS)      ignore=y ;;
+  esac
+  [ -n "$ignore" ]
+}
+
+iterate_hooks () {
+  if [ $# != 2 ]; then
+    echo "BUG: iterate_hooks called with wrong # of args: $*" >&2
+    return 1
+  fi
+
+  action="$1"
+  hook="$2"
+#   origdir="`pwd`"
+
+  hooks_found=
+
+  if [ -z "$ZDOTDIRPATH" ]; then
+    echo "\$ZDOTDIRPATH not defined; don't know where to search for hooks." >&2
+    return 1
+  fi
+
+  source "$ZDOTDIR/.zsh/functions/enable_nullglob"
+
+  [ -n "$ZSH_VERSION" ] && setopt local_options sh_word_split
+
+  for dir in $ZDOTDIRPATH; do
+    if ! [ -d "$dir" ]; then
+      if [ -n "$shell_interactive" ]; then
+        echo "BUG: $dir in \$ZDOTDIRPATH did not exist" >&2
+      fi
+      continue
+    fi
+
+    hook_d="$dir/$hook"
+
+    # Detect obsolete files from run_local_hooks
+    for hook_path in ${hook_d%%.d}.*; do
+      [ "$hook_path" = "$hook_d" ] && continue
+      if should_ignore "$hook_path"; then
+        if [ "$DEBUG_LOCAL_HOOKS" -ge 5 ]; then
+          echo "# Ignoring obsolete hook $hook_path"
+        fi
+        continue
+      elif [ "$DEBUG_LOCAL_HOOKS" -ge 2 ]; then
+        echo "WARNING: found obsolete hook $hook_path" >&2
+      fi
+    done
+
+    [ -d "$hook_d" ] || break
+
+#     if ! cd "$hook_d"; then
+#       echo "BUG?  Couldn't cd to $hook_d" >&2
+#       return 1
+#     fi
+
+    hostnick=$(cat $ZDOTDIR/.localhost-nickname)
+    : ${hostnick:=unknown}
+
+    for hook_path in $hook_d/*; do
+      dirent="${hook_path##*/}"
+
+      if [ "$DEBUG_LOCAL_HOOKS" -ge 3 ]; then
+        echo "# Considering possible hook $hook_path"
+      fi
+
+      if should_ignore "$dirent"; then
+        if [ "$DEBUG_LOCAL_HOOKS" -ge 5 ]; then
+          echo "# Ignoring possible hook $dirent"
+        fi
+        continue
+      fi
+
+      # Apply filter for special cases
+      special=
+      case "$dirent" in
+        person-*)
+          person="${dirent#person-}"
+          [ "$ZDOTUSER" = "$person" ] || continue
+          special=y
+          ;;
+        host-*)
+          host="${dirent#host-}"
+          # Be lenient with non-FQDN ambiguity
+          if [ "${HOSTNAME%%.*}" != "${host}"     ] && \
+             [ "${HOSTNAME}"     != "${host%%.*}" ] && \
+             [ "${hostnick}"     != "${host%%.*}" ]
+          then
+            [ "$DEBUG_LOCAL_HOOKS" -ge 4 ] && \
+              echo "#   $hook_path hostname $host does not match \$HOSTNAME $HOSTNAME"
+            continue
+          fi
+          special=y
+          ;;
+        uid-*)
+          uid="${dirent#uid-}"
+          if [ "$uid" = 'OWNER' ]; then
+            uid=$( stat -c '%U' "$hook_path" ) # portable?
+#            uid=$( command ls -l "$hook_path" | awk '{print $3}' ) # sucks
+          fi
+          if [ "$USERNAME" != "$uid" ]; then
+            [ "$DEBUG_LOCAL_HOOKS" -ge 4 ] && \
+              echo "#   $hook_path uid $uid does not match \$USERNAME $USERNAME"
+            continue
+          fi
+          special=y
+          ;;
+      esac
+
+      if [ -n "$special" ]; then
+        [ "$DEBUG_LOCAL_HOOKS" -ge 4 ] && \
+          echo "# $hook_path is a special case hook"
+        if [ -d "$hook_path" ]; then
+          for subhook in $hook_path/*; do
+            if should_ignore "$subhook"; then
+              if [ "$DEBUG_LOCAL_HOOKS" -ge 5 ]; then
+                echo "# Ignoring possible subhook $subhook"
+              fi
+              continue
+            fi
+            process_hook "$subhook"
+          done
+        elif [ -f "$hook_path" ]; then
+          echo "WARNING: $hook_path should be a directory not a file" >&2
+          process_hook "$hook_path"
+        else
+          echo "WARNING: $hook_path was not a directory or even a file" >&2
+          file "$hook_path" >&2
+        fi
+      else
+        if ! [ -d "$hook_path" ]; then
+          process_hook "$hook_path"
+        fi
+      fi
+    done
+  done
+
+  restore_nullglob
+}
+
+run_hooks () {
+  if [ $# != 1 ]; then
+    echo "Usage: run_hooks <hookname>" >&2
+    return 1
+  fi
+
+  if [ "$1" = 'DEFUN' ]; then
+    # We only want to define the functions above, not do anything.
+    # This is for the benefit of find_hooks.
+    return 0
+  fi
+  
+  iterate_hooks source "$@"
+}
+
+# Ensure we have sh_load_status.  It's missing when an X session starts up.
+if type sh_load_status >/dev/null 2>&1; then
+#if [ -z "$shared_env_loaded" ]; then
+  :
+else
+  # Catch 22, this would go into infinite recursion:
+  # . ${zdotdir:-$HOME}/.shared_env
+
+  sh_load_status () {
+    # This should only ever log to .xsession-my-errors anyway
+    echo "$0: $*"
+  }
+fi
+
+run_hooks "$@"
