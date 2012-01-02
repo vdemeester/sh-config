@@ -78,7 +78,7 @@ iterate_hooks () {
     return 1
   fi
 
-  source "$ZDOTDIR/.zsh/functions/enable_nullglob"
+  source "$ZDOTDIR/.sh/functions/enable_nullglob"
 
   [ -n "$ZSH_VERSION" ] && setopt local_options sh_word_split
 
