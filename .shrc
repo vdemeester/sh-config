@@ -10,6 +10,29 @@
 test -n "$INHERIT_ENV" && return 0
 test -n "$shrc_loaded" && return 0
 
+sh_load_status .shrc
+
+# {{{ HOME -------------------------------------------------------------------
+
+# Don't leave history files in /
+: ${HOME:=/}
+if [ "$HOME" = '/' ]; then
+  if [ -d /root ]; then
+    HOME=/root
+  elif [ -d /var/tmp ]; then
+    new_home=/var/tmp/root.tmphome
+    if [ -d "$new_home" ] || mkdir "$new_home"; then
+      HOME="$new_home"
+    fi
+  fi
+fi
+[ "$HOME" = '/' ] && echo "Warning: ~ is /"
+
+# }}}
+# {{{ PAGER ------------------------------------------------------------------
+export PAGER='less'
+export LESS='-a -h100 -i -j15 -M -q -R -W -y100 -X'
+# }}}
 # Load shrc hooks (if present)
 . $ZDOT_RUN_HOOKS .shrc.d
 
