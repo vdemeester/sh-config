@@ -16,15 +16,6 @@ command -v keychain >/dev/null && {
     eval $(keychain --eval --inherit any-once --quick --quiet)
 }
 # }}}
-# {{{ xorg start onn tty1 ----------------------------------------------------
-if [ -z "$DISPLAY" ] && [ $(tty) = /dev/tty1 ]; then
-    while true
-    do
-        startx > $HOME/.local/logs/.xsession.log 2>&1
-        sleep 10
-    done
-fi
-# }}}
 
 sh_load_status .shlogin
 
@@ -32,4 +23,3 @@ sh_load_status .shlogin
 
 shlogin_loaded=y
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4
-
