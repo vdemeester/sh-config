@@ -9,7 +9,10 @@
 # environment variables. It should not contain commands that produce output or
 # assume the shell is attached to a tty. Keep it light
 #
-# Order : .zshenv (-> .shenv), .zprofile, .zshrc, .zlogin
+# Order interactive login           : .zshenv (.shenv, .shrc), .zprofile, .zshrc, .zlogin
+# Order interactive non-login       : .zshenv (.shenv, .shrc), .zshrc
+# Order non-interactive login       : .zshenv (.shenv), .zprofile, .zlogin
+# Order non-interactive non-login   : .zshenv (.shenv)
 # --------------------------------------------------------------------------- #
 # Allow disabling of entire environment suite
 test -n "$INHERIT_ENV" && return 0
