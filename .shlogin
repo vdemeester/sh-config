@@ -22,4 +22,4 @@ sh_load_status .shlogin
 . $ZDOT_RUN_HOOKS .shlogin.d
 
 shlogin_loaded=y
-# vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4
+# vim:filetype=sh foldmethod=marker autoindent expandtab shiftwidth=4
