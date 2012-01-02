@@ -29,4 +29,10 @@ sh_load_status ".zshenv already started before .shenv"
 # Enable extended_glob for zsh "everywhere"
 setopt extended_glob
 
+# {{{ PATH / … ---------------------------------------------------------------
+# Prevent duplicates in path variables
+typeset -U path
+typeset -U manpath
+export MANPATH
+# }}}
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4
