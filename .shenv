@@ -92,6 +92,28 @@ if ! test -e $syspath; then
 fi
 # Setting a fairly portable PATH
 PATH=/usr/local/bin:/usr/X11R6/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/games:/usr/games
+# Build PATH with common bin folders
+. $ZDOTDIR/.sh/functions/enable_wordsplit
+newpaths=
+for dir in $ZDOTDIRREVPATH; do
+    for newpath in                          \
+                    $dir/sbin               \
+                    $dir/bin                \
+                    $dir/.local/$OSTYPE/bin \
+                    $dir/.local/sbin        \
+                    $dir/.local/bin         \
+    ; do
+        if test -d $newpath; then
+            if test -z "$newpaths"; then
+                newpaths=$newpath
+            else
+                newpaths=$newpaths:$newpath
+            fi
+        fi
+    done
+done
+restore_wordsplit
+PATH=$newpaths:$PATH
 # The PATH might be completed by $ZDOTDIR/.shared_env.d hooks.
 # }}}
 # {{{ LANG -------------------------------------------------------------------
