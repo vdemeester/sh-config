@@ -105,4 +105,13 @@ fi
 # FIXME LANGUAGE seems to be the same as LC_MESSAGES. to confirm.
 # FIXME What about darwin stuff ?
 # }}}
+
+# Load shared_env hooks (if present)
+. $ZDOT_RUN_HOOKS .shared_env.d
+
+if test -n "$shell_interactive"; then
+    . $ZDOTDIR/.shrc
+fi
+
+shared_env_loaded=y
 # vim:filetype=sh foldmethod=marker autoindent expandtab shiftwidth=4
