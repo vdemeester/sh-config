@@ -6,6 +6,10 @@
 #
 # Order: .zshenv, .zprofile, .zshrc, .zlogin
 # --------------------------------------------------------------------------- #
+# Allow disabling of entire environment suite
+test -n "$INHERIT_ENV" && return 0
+
+sh_load_status .zlogout
 
 # make sure screen is empty on exit
 clear

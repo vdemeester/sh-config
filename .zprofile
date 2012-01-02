@@ -7,6 +7,9 @@
 #
 # Order: .zshenv, .zprofile, .zshrc, .zlogin
 # --------------------------------------------------------------------------- #
-echo ".zprofile"
+# Allow disabling of entire environment suite
+test -n "$INHERIT_ENV" && return 0
+
+sh_load_status .zprofile
 
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4

@@ -25,4 +25,8 @@ export ZDOTDIR="${zdotdir}"
 [[ -e $zdotdir/.shenv ]] && . $zdotdir/.shenv
 
 sh_load_status ".zshenv already started before .shenv"
+
+# Enable extended_glob for zsh "everywhere"
+setopt extended_glob
+
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4
