@@ -6,6 +6,7 @@
 !.sh/functions/
 !.sh/functions/*
 !.shenv
+!.shrc
 !.zlogin
 !.zlogout
 !.zshenv
