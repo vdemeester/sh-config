@@ -21,4 +21,15 @@ sh_load_status .zshrc
 # Load zshrc.d
 . $ZDOT_RUN_HOOKS .zshrc.d
 
+# {{{ Clear up after status display ------------------------------------------
+# We clean if in interactive mode, else, there is zlogin that comes after.
+if test -n "$shell_interactive"; then
+    if [[ $TERM == tgtelnet ]]; then
+      echo
+    else
+      echo -n "\r"
+    fi
+fi
+# }}}
+
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4

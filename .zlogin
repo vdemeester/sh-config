@@ -17,4 +17,14 @@ sh_load_status .zlogin
 
 . $ZDOT_RUN_HOOKS .zlogin.d
 
+# {{{ Clear up after status display ------------------------------------------
+
+if [[ $TERM == tgtelnet ]]; then
+  echo
+else
+  echo -n "\r"
+fi
+
+# }}}
+
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4
