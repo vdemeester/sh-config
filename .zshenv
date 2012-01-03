@@ -28,6 +28,9 @@ export ZDOTDIR="${zdotdir}"
 
 sh_load_status ".zshenv already started before .shenv"
 
+# Load shared_env hooks (if present)
+. $ZDOT_RUN_HOOKS .sh/hook/zshenv.pre
+
 # Enable extended_glob for zsh "everywhere"
 setopt extended_glob
 
@@ -38,6 +41,6 @@ typeset -U manpath
 export MANPATH
 # }}}
 # Load shared_env hooks (if present)
-. $ZDOT_RUN_HOOKS .zshenv.d
+. $ZDOT_RUN_HOOKS .sh/hook/zshenv.post
 
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4

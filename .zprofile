@@ -12,9 +12,11 @@ test -n "$INHERIT_ENV" && return 0
 
 sh_load_status .zprofile
 
+. $ZDOT_RUN_HOOKS .sh/hook/zprofile.pre
+
 [[ -e $zdotdir/.profile ]] && . $zdotdir/.profile
 
-. $ZDOT_RUN_HOOKS .zprofile.d
+. $ZDOT_RUN_HOOKS .sh/hook/zprofile.post
 
 
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4

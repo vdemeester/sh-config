@@ -11,6 +11,8 @@ test -n "$shlogout_loaded" && return 0
 
 sh_load_status .shlogout
 
+. $ZDOT_RUN_HOOKS .sh/hook/shlogout.pre
+
 # {{{ Clear console on logout ------------------------------------------------
 # When leaving the console clear the screen to increase privacy. Taken from
 # Debian default bash files and modified. Thanks.
@@ -27,7 +29,7 @@ fi
 sudo -k > /dev/null 2>&1
 # }}}
 
-. $ZDOT_RUN_HOOKS .shlogout.d
+. $ZDOT_RUN_HOOKS .sh/hook/shlogout.post
 
 shlogout_loaded=y
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4

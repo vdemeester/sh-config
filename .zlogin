@@ -13,9 +13,11 @@ test -n "$INHERIT_ENV" && return 0
 
 sh_load_status .zlogin
 
+. $ZDOT_RUN_HOOKS .sh/hook/zlogin.pre
+
 [[ -e $zdotdir/.shlogin ]] && . $zdotdir/.shlogin
 
-. $ZDOT_RUN_HOOKS .zlogin.d
+. $ZDOT_RUN_HOOKS .sh/hook/zlogin.post
 
 # {{{ Clear up after status display ------------------------------------------
 

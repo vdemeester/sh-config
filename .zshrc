@@ -16,6 +16,9 @@ test -n "$INHERIT_ENV" && return 0
 
 sh_load_status .zshrc
 
+# Load zshrc.d
+. $ZDOT_RUN_HOOKS .sh/hook/zshrc.pre
+
 [[ -e $zdotdir/.shrc ]] && . $zdotdir/.shrc
 
 # {{{ HOOKS ------------------------------------------------------------------
@@ -51,7 +54,7 @@ autoload -Uz add-zsh-hook
 # }}}
 
 # Load zshrc.d
-. $ZDOT_RUN_HOOKS .zshrc.d
+. $ZDOT_RUN_HOOKS .sh/hook/zshrc.post
 
 # {{{ Clear up after status display ------------------------------------------
 # We clean if in login mode, else, there is zlogin that comes after.

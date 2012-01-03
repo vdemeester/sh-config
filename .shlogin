@@ -11,6 +11,8 @@
 test -n "$INHERIT_ENV" && return 0
 test -n "$shlogin_loaded" && return 0
 
+. $ZDOT_RUN_HOOKS .sh/hook/shlogin.pre
+
 # {{{ Keychain -------------------------------------------------------------- #
 command -v keychain >/dev/null && {
     eval $(keychain --eval --inherit any-once --quick --quiet)
@@ -19,7 +21,7 @@ command -v keychain >/dev/null && {
 
 sh_load_status .shlogin
 
-. $ZDOT_RUN_HOOKS .shlogin.d
+. $ZDOT_RUN_HOOKS .sh/hook/shlogin.post
 
 shlogin_loaded=y
 # vim:filetype=sh foldmethod=marker autoindent expandtab shiftwidth=4

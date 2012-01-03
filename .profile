@@ -16,13 +16,15 @@ test -n "$profile_loaded" && return 0
 
 sh_load_status .profile
 
+. $ZDOT_RUN_HOOKS .sh/hook/shprofile.pre
+
 # init me !
 # FIXME This should go elsewhere (in hooks probably)
 if [ ! -d $HOME/.local/logs ]; then
     mkdir -p $HOME/.local/logs
 fi
 
-. $ZDOT_RUN_HOOKS .profile.d
+. $ZDOT_RUN_HOOKS .sh/hook/shprofile.post
 
 profile_loaded=y
 # vim:filetype=sh foldmethod=marker autoindent expandtab shiftwidth=4

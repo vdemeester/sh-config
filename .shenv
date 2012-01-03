@@ -83,6 +83,10 @@ else
     ZDOTDIRREVPATH="$HOME $ZDOTDIR"
 fi
 # }}}
+
+# Load shenv hooks (if present)
+. $ZDOT_RUN_HOOKS .sh/hook/shenv.pre
+
 # {{{ USER / USERNAME --------------------------------------------------------
 # zsh sets USERNAME, GROUPS and E?[UG]ID
 # bash only sets E?UID
@@ -149,7 +153,7 @@ test -z "$BROWSER" && command -v firefox >/dev/null && {
 }
 # }}}
 # Load shenv hooks (if present)
-. $ZDOT_RUN_HOOKS .shenv.d
+. $ZDOT_RUN_HOOKS .sh/hook/shenv.post
 
 shenv_loaded=y
 # vim:filetype=sh foldmethod=marker autoindent expandtab shiftwidth=4
