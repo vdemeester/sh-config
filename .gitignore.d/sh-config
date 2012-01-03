@@ -6,8 +6,8 @@
 !.sh/functions/
 !.sh/functions/*
 !.sh/hook
-!.sh/hook/*
-!.sh/hook/*/*
+!.sh/hook/zshrc.pre
+!.sh/hook/zshrc.pre/git
 !.shenv
 !.shrc
 !.shprofile
