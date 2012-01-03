@@ -11,6 +11,22 @@ test -n "$shlogout_loaded" && return 0
 
 sh_load_status .shlogout
 
+# {{{ Clear console on logout ------------------------------------------------
+# When leaving the console clear the screen to increase privacy. Taken from
+# Debian default bash files and modified. Thanks.
+if [ "$SHLVL" = 1 ]; then
+    if [ -x /usr/bin/clear_console ]; then
+        /usr/bin/clear_console -q
+    else
+        clear
+    fi
+fi
+# }}}
+# {{{ Sudo cleaning ----------------------------------------------------------
+# Make sure sudo rights are removed.
+sudo -k > /dev/null 2>&1
+# }}}
+
 . $ZDOT_RUN_HOOKS .shlogout.d
 
 shlogout_loaded=y
