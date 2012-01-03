@@ -9,9 +9,11 @@
 # environment variables. It should not contain commands that produce output or
 # assume the shell is attached to a tty. Keep it light
 #
-# Order interactive login           : .zshenv (.shenv, .shrc), .zprofile, .zshrc, .zlogin
-# Order interactive non-login       : .zshenv (.shenv, .shrc), .zshrc
-# Order non-interactive login       : .zshenv (.shenv), .zprofile, .zlogin
+# Order interactive login           : .zshenv (.shenv), .zprofile (.shprofile),
+#                                     .zshrc (.shrc), .zlogin (.shlogin)
+# Order interactive non-login       : .zshenv (.shenv), .zshrc (.shrc)
+# Order non-interactive login       : .zshenv (.shenv), .zprofile (.shprofile),
+#                                     .zlogin (.shlogin)
 # Order non-interactive non-login   : .zshenv (.shenv)
 # --------------------------------------------------------------------------- #
 # Allow disabling of entire environment suite
