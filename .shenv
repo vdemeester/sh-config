@@ -17,6 +17,12 @@ case "$-" in
       *) shell_interactive=  ;;
 esac
 # }}}
+# {{{ Are we login ? ---------------------------------------------------------
+case "$-" in
+    *l*) shell_login=y ;;
+      *) shell_login=  ;;
+esac
+# }}}
 # {{{ Loading status ---------------------------------------------------------
 # Default to 1, and treat empty as 0.  This ensures we have an integer.
 : ${DEBUG_LOCAL_HOOKS=1}
