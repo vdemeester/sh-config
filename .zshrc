@@ -54,8 +54,8 @@ autoload -Uz add-zsh-hook
 . $ZDOT_RUN_HOOKS .zshrc.d
 
 # {{{ Clear up after status display ------------------------------------------
-# We clean if in interactive mode, else, there is zlogin that comes after.
-if test -n "$shell_interactive"; then
+# We clean if in login mode, else, there is zlogin that comes after.
+if test -z "$shell_login"; then
     if [[ $TERM == tgtelnet ]]; then
       echo
     else
