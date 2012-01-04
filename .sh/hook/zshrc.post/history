@@ -1,0 +1,17 @@
+# Filename:     .sh/hook/zshrc.post/history
+# Author:       Vincent Demeester
+# License:      This file is licensed under the GPL v2
+# --------------------------------------------------------------------------- #
+# History options
+# --------------------------------------------------------------------------- #
+setopt EXTENDED_HISTORY 
+setopt SHARE_HISTORY # _all
+setopt HIST_IGNORE_ALL_DUPS # ignores duplications
+
+if ! test -d "$HOME/.local/run"; then
+    mkdir -p "$HOME/.local/run"
+fi
+HISTFILE=$HOME/.local/run/history-$HOST-$UID
+HISTSIZE=20000
+SAVEHIST=20000
+# vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4

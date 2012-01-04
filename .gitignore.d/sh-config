@@ -8,6 +8,8 @@
 !.sh/hook
 !.sh/hook/zshrc.pre
 !.sh/hook/zshrc.pre/git
+!.sh/hook/zshrc.post
+!.sh/hook/zshrc.post/history
 !.shenv
 !.shrc
 !.shprofile
