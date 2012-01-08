@@ -1,0 +1,17 @@
+# Filename:     .sh/hook/zshrc.pre/chroot
+# Author:       Vincent Demeester
+# License:      This file is licensed under the GPL v2
+# --------------------------------------------------------------------------- #
+# This file append is doing some chroot stuff, like adding something in prompt
+# if we are in a chroot (like the default bashrc on debian).
+# --------------------------------------------------------------------------- #
+# {{{ PROMPT -----------------------------------------------------------------
+[[ -z $SCHROOT_CHROOT_NAME ]] || {
+    _vde_add_rprompt_chroot () {
+        print -n '${PR_CYAN}$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT'
+        print -n '${PR_GREY}(${PR_YELLOW}sch:${PR_NO_COLOUR}${SCHROOT_CHROOT_NAME}${PR_GREY})'
+    }
+}
+# }}}
+# vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4
+
