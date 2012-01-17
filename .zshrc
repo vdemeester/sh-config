@@ -187,6 +187,8 @@ zstyle ':completion:*:descriptions' format '%B%d%b'
 zmodload -i zsh/complist
 bindkey -M menuselect "+" accept-and-menu-complete
 # }}}
+# {{{ ALIAS ------------------------------------------------------------------
+# }}}
 # Load zshrc.d
 . $ZDOT_RUN_HOOKS .sh/hook/zshrc.post
 
