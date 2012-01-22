@@ -37,6 +37,13 @@ export PAGER='less'
 export LESS='-a -h100 -i -j15 -M -q -R -W -y100 -X'
 # }}}
 # {{{ ALIAS ------------------------------------------------------------------
+# {{{ ssh
+ssh_command=ssh
+command -v ssh_wrapper >/dev/null && {
+    ssh_command=ssh_wrapper
+}
+alias ssh=$ssh_command
+# }}}
 # }}}
 # Load shrc hooks (if present)
 . $ZDOT_RUN_HOOKS .sh/hook/shrc.post
