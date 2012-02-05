@@ -43,6 +43,26 @@ command -v ssh_wrapper >/dev/null && {
     ssh_command=ssh_wrapper
 }
 alias ssh=$ssh_command
+# {{{ tree
+alias tre='tree -C'
+# }}}
+# {{{ ls aliases
+if ls -F --color / >&/dev/null; then
+    LS_OPTS='-F --color'
+elif ls -F / >&/dev/null; then
+    LS_OPTS='-F'
+elif ls --color / >&/dev/null; then
+    LS_OPTS='--color'
+fi
+# jeez I'm lazy ...
+for opts in {,a}{,r}{,t}{,L}{,S}; do
+    eval "alias l$opts='ls -lh$opts $LS_OPTS'"
+    eval "alias ll$opts='ls -l$opts $LS_OPTS'"
+    eval "alias ls$opts='ls ${opts:+-$opts} $LS_OPTS'"
+done
+alias ld='ls -ldh'
+alias sl=ls # often screw this up
+# }}}
 # }}}
 # }}}
 # Load shrc hooks (if present)

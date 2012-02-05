@@ -173,21 +173,210 @@ setopt glob_complete
 setopt complete_aliases
 unsetopt list_beep
 
+zstyle ':completion:*' completer _complete _prefix _ignored _complete:-extended
+# e.g. f-1.j<TAB> would complete to foo-123.jpeg
+zstyle ':completion:*:complete-extended:*' \
+  matcher 'r:|[.,_-]=* r:|=*'
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt ''
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:*:*:*:*' menu select
+# {{{ Expand partial paths
+
+# e.g. /u/s/l/D/fs<TAB> would complete to
+#      /usr/src/linux/Documentation/fs
+zstyle ':completion:*' expand 'yes'
+zstyle ':completion:*' squeeze-slashes 'yes'
+
+# }}}
+# {{{ Include non-hidden dirs in globbed file completions for certain commands
+
+#zstyle ':completion::complete:*' \
+#  tag-order 'globbed-files directories' all-files 
+#zstyle ':completion::complete:*:tar:directories' file-patterns '*~.*(-/)'
+
+# }}}
+# {{{ Don't complete backup files (e.g. 'bin/foo~') as executables
+
+zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
+
+# }}}
+# {{{ Don't complete uninteresting users
+
+zstyle ':completion:*:*:*:users' ignored-patterns \
+        adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
+        dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
+        hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
+        mailman mailnull mldonkey mysql nagios \
+        named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
+        operator pcap postfix postgres privoxy pulse pvm quagga radvd \
+        rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs
+
+# ... unless we really want to.
+zstyle '*' single-ignored show
+
+# }}}
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 zstyle ':completion:*:*:*:*:processes' command "ps -eo pid,user,comm -w -w"
 zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path $ZSH/run/cache/
 zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle    ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
+                                  /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
+# this will include newly installed programs into tab completion
+_force_rehash() { (( CURRENT == 1 )) && rehash return 1 }
+zstyle    ':completion:*' completers _force_rehash
+
+LISTMAX=0       # only ask if completion should be shown if it is larger than our screen
+# this will not complete dotfiles in ~, unless you provide at least .<tab>
+zstyle -e ':completion:*' ignored-patterns 'if [[ $PWD = ~ ]] && [[ ! $words[-1] == .* ]]; then reply=(.*); fi'
+# Don't complete backup files (e.g. 'bin/foo~') as executables
+zstyle    ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
 
 # In menu, select items with +
 zmodload -i zsh/complist
 bindkey -M menuselect "+" accept-and-menu-complete
 # }}}
+# {{{ KEYS -------------------------------------------------------------------
+# insert Unicode character
+autoload      insert-unicode-char
+zle -N        insert-unicode-char
+bindkey '^xi' insert-unicode-char
+# "ctrl-e D" to insert the actual datetime YYYY/MM
+              __insert-datetime-directory() { BUFFER="$BUFFER$(date '+%Y/%m')"; CURSOR=$#BUFFER; }
+zle -N        __insert-datetime-directory
+bindkey '^eD' __insert-datetime-directory
+
+# "ctrl-e d" to insert the actual datetime YYYY-MM-DD--hh-mm-ss-TZ
+              __insert-datetime-default() { BUFFER="$BUFFER$(date '+%F--%H-%M-%S-%Z')"; CURSOR=$#BUFFER; }
+zle -N        __insert-datetime-default
+bindkey '^ed' __insert-datetime-default
+# "ctrl-e w" to delete to prior whitespace
+autoload -U   delete-whole-word-match
+zle -N        delete-whole-word-match
+bindkey "^ew" delete-whole-word-match
+
+# "ctrl-e ." to insert last typed word again
+              __insert-last-typed-word() { zle insert-last-word -- 0 -1 };
+zle -N        __insert-last-typed-word;
+bindkey "^e." __insert-last-typed-word
+# "ctrl-e q" to quote line
+__quote_line () {
+	zle beginning-of-line
+	zle forward-word
+	RBUFFER=${(q)RBUFFER}
+	zle end-of-line
+}
+zle -N        __quote_line
+bindkey '^eq' __quote_line
+# "ctrl-e 1" to jump behind the first word on the cmdline
+function __jump_behind_first_word() {
+	local words
+	words=(${(z)BUFFER})
+
+	if (( ${#words} <= 1 )) ; then
+		CURSOR=${#BUFFER}
+	else
+		CURSOR=${#${words[1]}}
+	fi
+}
+zle -N        __jump_behind_first_word
+bindkey '^e1' __jump_behind_first_word
+# "ctrl-e e" : open iZLE buffer in $EDITOR
+autoload      edit-command-line
+zle -N        edit-command-line
+bindkey '^ee' edit-command-line
+bindkey '^e^e' edit-command-line
+# }}}
 # {{{ ALIAS ------------------------------------------------------------------
+# Sweet trick from zshwiki.org :-)
+cd () {
+  if (( $# != 1 )); then
+    builtin cd "$@"
+    return
+  fi
+
+  if [[ -f "$1" ]]; then
+    builtin cd "$1:h"
+  else
+    builtin cd "$1"
+  fi
+}
+
+z () {
+  cd ~/"$1"
+}
+# {{{ Renaming
+
+autoload zmv
+alias mmv='noglob zmv -W'
+
+# }}}
+# {{{ MIME handling
+
+autoload zsh-mime-setup
+zsh-mime-setup
+
+# }}}
+# {{{ Paging with less / head / tail
+
+alias -g L='| less'
+alias -g LS='| less -S'
+alias -g EL='|& less'
+alias -g ELS='|& less -S'
+alias -g TRIM='| trim-lines'
+
+alias -g H='| head'
+alias -g HL='| head -n $(( +LINES ? LINES - 4 : 20 ))'
+alias -g EH='|& head'
+alias -g EHL='|& head -n $(( +LINES ? LINES - 4 : 20 ))'
+
+alias -g T='| tail'
+alias -g TL='| tail -n $(( +LINES ? LINES - 4 : 20 ))'
+alias -g ET='|& tail'
+alias -g ETL='|& tail -n $(( +LINES ? LINES - 4 : 20 ))'
+
+# }}}
+alias -g V='| vim -'
+alias -g X='| xargs'
+# {{{ Sorting / counting
+
+alias -g C='| wc -l'
+
+alias -g S='| sort'
+alias -g Su='| sort -u'
+alias -g Sn='| sort -n'
+alias -g Snr='| sort -nr'
+alias -g SUc='| sort | uniq -c'
+alias -g SUd='| sort | uniq -d'
+alias -g Uc='| uniq -c'
+alias -g Ud='| uniq -d'
+
+# }}}
+# {{{ awk
+
+alias -g A='| awk '
+alias -g A1="| awk '{print \$1}'"
+alias -g A2="| awk '{print \$2}'"
+alias -g A3="| awk '{print \$3}'"
+alias -g A4="| awk '{print \$4}'"
+alias -g A5="| awk '{print \$5}'"
+alias -g A6="| awk '{print \$6}'"
+alias -g A7="| awk '{print \$7}'"
+alias -g A8="| awk '{print \$8}'"
+alias -g A9="| awk '{print \$9}'"
+alias -g EA='|& awk '
+alias -g EA1="|& awk '{print \$1}'"
+alias -g EA2="|& awk '{print \$2}'"
+alias -g EA3="|& awk '{print \$3}'"
+alias -g EA4="|& awk '{print \$4}'"
+alias -g EA5="|& awk '{print \$5}'"
+alias -g EA6="|& awk '{print \$6}'"
+alias -g EA7="|& awk '{print \$7}'"
+alias -g EA8="|& awk '{print \$8}'"
+alias -g EA9="|& awk '{print \$9}'"
+
+# }}}
 # }}}
 # Load zshrc.d
 . $ZDOT_RUN_HOOKS .sh/hook/zshrc.post
