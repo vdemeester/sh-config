@@ -84,6 +84,9 @@ else
 fi
 # }}}
 
+# Default but… anyway
+export XDG_CONFIG_HOME=$HOME/.config
+
 # Load shenv hooks (if present)
 . $ZDOT_RUN_HOOKS .sh/hook/shenv.pre
 
