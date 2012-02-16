@@ -388,7 +388,7 @@ hash -d sh=$HOME/.sh
 hash -d mr=$XDG_CONFIG_HOME/mr
 hash -d repo.d=$XDG_CONFIG_HOME/vcsh/repo.d
 hash -d work.d=$HOME/documents/work
-hash -d work.s=$HOME/documents/work/workspaces
+hash -d work.s=$HOME/src/work
 # }}}
 # Load zshrc.d
 . $ZDOT_RUN_HOOKS .sh/hook/zshrc.post
