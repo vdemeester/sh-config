@@ -104,7 +104,7 @@ if ! test -e $syspath; then
     echo "$PATH" 2>/dev/null > "$syspath"
 fi
 # Setting a fairly portable PATH
-PATH=/usr/local/bin:/usr/X11R6/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/games:/usr/games
+PATH=/usr/local/bin:/usr/X11R6/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/games:/usr/games:/usr/local/git/bin
 # Build PATH with common bin folders
 . $ZDOTDIR/.sh/functions/enable_wordsplit
 newpaths=
@@ -115,6 +115,7 @@ for dir in $ZDOTDIRREVPATH; do
                     $dir/.local/$OSTYPE/bin \
                     $dir/.local/sbin        \
                     $dir/.local/bin         \
+                    $dir/pkg/bin            \
     ; do
         if test -d $newpath; then
             if test -z "$newpaths"; then
