@@ -43,6 +43,7 @@ command -v ssh_wrapper >/dev/null && {
     ssh_command=ssh_wrapper
 }
 alias ssh=$ssh_command
+# }}}
 # {{{ tree
 alias tre='tree -C'
 # }}}
@@ -62,7 +63,6 @@ for opts in {,a}{,r}{,t}{,L}{,S}; do
 done
 alias ld='ls -ldh'
 alias sl=ls # often screw this up
-# }}}
 # }}}
 # }}}
 # Load shrc hooks (if present)

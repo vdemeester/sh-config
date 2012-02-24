@@ -63,6 +63,20 @@ sh_load_status () {
   fi
 }
 # }}}
+# {{{ Message(s) --------------------------------------------------------------
+note() {
+    echo "$(tput setaf 6)>$(tput bold)>$(tput sgr0) $1"
+}
+info() {
+    echo "$(tput setaf 2)>$(tput bold)>$(tput sgr0) $1"
+}
+warn() {
+    echo "$(tput setaf 3)>$(tput bold)>$(tput sgr0) $1"
+}
+error() {
+    echo "$(tput setaf 1)>$(tput bold)>$(tput sgr0) $1"
+}
+# }}}
 sh_load_status .shenv
 
 # {{{ ZDOTDIR / …

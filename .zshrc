@@ -484,7 +484,7 @@ fi # is433
 chpwd_profile_default() {
     [[ ${profile} == ${CHPWD_PROFILE} ]] && return 1
 
-    echo "<<< Back to default profile"
+    note "Back default profile"
     # Remove some environment variables possibly set
     unset GIT_AUTHOR_EMAIL
     unset GIT_COMMITTER_EMAIL
