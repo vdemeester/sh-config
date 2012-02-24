@@ -23,6 +23,9 @@ sh_load_status .profile
 if [ ! -d $HOME/.local/logs ]; then
     mkdir -p $HOME/.local/logs
 fi
+if [ ! -d $HOME/.local/tmp ]; then
+    mkdir -p $HOME/.local/tmp
+fi
 
 . $ZDOT_RUN_HOOKS .sh/hook/shprofile.post
 
