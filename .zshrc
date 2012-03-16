@@ -159,6 +159,12 @@ _vde_add_rprompt () {
 # Call setprompt !
 _vde_setprompt
 # }}}
+# {{{ OPTIONS ----------------------------------------------------------------
+if [ ${ZSH_VERSION//\./} -ge 420 ]; then
+    autoload -U url-quote-magic
+    zle -N self-insert url-quote-magic
+fi
+# }}}
 # {{{ COMPLETIONS ------------------------------------------------------------
 autoload -U zutil
 autoload -U compinit
