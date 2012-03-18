@@ -293,6 +293,9 @@ autoload      edit-command-line
 zle -N        edit-command-line
 bindkey '^ee' edit-command-line
 bindkey '^e^e' edit-command-line
+# History
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
 # }}}
 # {{{ ALIAS ------------------------------------------------------------------
 # Sweet trick from zshwiki.org :-)

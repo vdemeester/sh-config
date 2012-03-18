@@ -1,6 +1,7 @@
 *
 !.bashrc
 !.profile
+!.inputrc
 !.sh
 !.sh/*
 !.sh/functions/
