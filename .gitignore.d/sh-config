@@ -22,5 +22,10 @@
 !.zshenv
 !.zprofile
 !.zshrc
+!lib
+!lib/libhooks.sh
+!lib/libhost.sh
+!lib/liblogging.sh
+!lib/libuid.sh
 !.gitignore.d
 !.gitignore.d/sh-config
