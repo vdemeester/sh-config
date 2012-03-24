@@ -22,9 +22,9 @@ fi
 if test -d /usr/pkg/sbin; then
     NEW_PATH=/usr/pkg/sbin:$NEW_PATH
 fi
-# $HOME/.local/bin have to be *first* in the PATH
-if test -d $HOME/.local/bin; then
-    NEW_PATH=$HOME/.local/bin:$NEW_PATH
+# $HOME/bin have to be *first* in the PATH
+if test -d $HOME/bin; then
+    NEW_PATH=$HOME/bin:$NEW_PATH
 fi
 for pluginpathfile in ${SH}/plugins/*.path.{sh,${CSHELL}}; do
     . ${pluginpathfile}

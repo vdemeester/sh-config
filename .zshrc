@@ -169,7 +169,7 @@ fi
 autoload -U zutil
 autoload -U compinit
 autoload -U complist
-compinit -i -d $HOME/.local/run/zcompdump-$HOST-$UID
+compinit -i -d $HOME/run/zcompdump-$HOST-$UID
 
 setopt auto_menu
 setopt auto_remove_slash

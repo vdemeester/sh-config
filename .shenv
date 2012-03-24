@@ -126,9 +126,8 @@ for dir in $ZDOTDIRREVPATH; do
     for newpath in                          \
                     $dir/sbin               \
                     $dir/bin                \
-                    $dir/.local/$OSTYPE/bin \
-                    $dir/.local/sbin        \
-                    $dir/.local/bin         \
+                    $dir/bin/$OSTYPE        \
+                    $dir/sbin               \
                     $dir/pkg/bin            \
     ; do
         if test -d $newpath; then
