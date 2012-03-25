@@ -37,7 +37,7 @@ EOF
 
     # Ensure we have $ZDOT_FIND_HOOKS; if this is being invoked from
     # be.sh then we probably don't.
-    source $ZDOTDIR/.shared_env 
+    source $ZDOTDIR/.shenv
 
     # sort by filename not by path
     $ZDOT_FIND_HOOKS "$hookdir" | \

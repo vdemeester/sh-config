@@ -96,6 +96,7 @@ else
     ZDOTDIRPATH="$ZDOTDIR $HOME"
     ZDOTDIRREVPATH="$HOME $ZDOTDIR"
 fi
+export ZDOTDIRPATH ZDOTDIRREVPATH
 # }}}
 
 # Default but… anyway
