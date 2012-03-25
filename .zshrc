@@ -398,6 +398,18 @@ hash -d mr=$XDG_CONFIG_HOME/mr
 hash -d repo.d=$XDG_CONFIG_HOME/vcsh/repo.d
 hash -d work.d=$HOME/documents/work
 hash -d work.s=$HOME/src/work
+# few more default dirs {{{
+command -v xdg-user-dir >/dev/null && {
+hash -d pics=$(xdg-user-dir PICTURES)
+hash -d pictures=$(xdg-user-dir PICTURES)
+hash -d downloads=$(xdg-user-dir DOWNLOAD)
+hash -d dls=$(xdg-user-dir DOWNLOAD)
+hash -d music=$(xdg-user-dir MUSIC)
+hash -d videos=$(xdg-user-dir VIDEOS)
+hash -d templates=$(xdg-user-dir TEMPLATES)
+hash -d public=$(xdg-user-dir PUBLICSHARE)
+}
+# }}}
 # }}}
 # {{{ PROFILES ---------------------------------------------------------------
 # Setting a default profile for 'any other folder'
