@@ -7,6 +7,10 @@
 !.sh/functions/
 !.sh/functions/*
 !.sh/hook
+!.sh/hook/shprofile.pre
+!.sh/hook/shprofile.pre/.placeholder
+!.sh/hook/shprofile.post
+!.sh/hook/shprofile.post/.placeholder
 !.sh/hook/zshrc.pre
 !.sh/hook/zshrc.pre/chroot
 !.sh/hook/zshrc.pre/git
