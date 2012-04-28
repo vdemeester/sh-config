@@ -73,6 +73,15 @@ alias ld='ls -ldh'
 alias sl=ls # often screw this up
 # }}}
 # }}}
+# {{{ TERM --------------------------------------------------------------
+if test "${COLORTERM}" = "gnome-terminal"; then
+    if test -e /usr/share/terminfo/x/xterm-256color || test -e /lib/terminfo/x/xterm-256color; then
+        export TERM="xterm-256color"
+    else
+        export TERM="xterm-color"
+    fi
+fi
+# }}}
 # Load shrc hooks (if present)
 . $ZDOT_RUN_HOOKS .sh/hook/shrc.post
 

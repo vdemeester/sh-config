@@ -20,8 +20,8 @@ sh_load_status .profile
 
 # init me !
 # FIXME This should go elsewhere (in hooks probably)
-if [ ! -d $HOME/.local/logs ]; then
-    mkdir -p $HOME/.local/logs
+if [ ! -d $HOME/.local/log ]; then
+    mkdir -p $HOME/.local/log
 fi
 if [ ! -d $HOME/.local/tmp ]; then
     mkdir -p $HOME/.local/tmp
