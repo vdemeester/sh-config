@@ -142,7 +142,6 @@ for dir in $ZDOTDIRREVPATH; do
 done
 restore_wordsplit
 PATH=$newpaths:$PATH
-# The PATH might be completed by $ZDOTDIR/.shared_env.d hooks.
 # }}}
 # {{{ LANG -------------------------------------------------------------------
 # I am french but I like using my software in English :
