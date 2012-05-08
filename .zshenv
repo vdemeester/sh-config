@@ -40,6 +40,7 @@ sh_load_status "fpath/autoloads"
 
 fpath=(
         $zdotdir/.sh/functions{,.local,.$HOST}(N)
+        $zdotdir/.sh/completions(N)
         $fpath
         # very old versions
         # /usr/doc/zsh*/[F]unctions(N)
