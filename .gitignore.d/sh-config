@@ -1,5 +1,9 @@
 *
 !.bashrc
+!.config
+!.config/mr
+!.config/mr/groups.d
+!.config/mr/groups.d/sh-config
 !.profile
 !.inputrc
 !.sh
