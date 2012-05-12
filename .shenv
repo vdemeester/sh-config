@@ -143,6 +143,11 @@ done
 restore_wordsplit
 PATH=$newpaths:$PATH
 # }}}
+# {{{ MANPATH --------------------------------------------------------------- #
+if test -d $HOME/share/man; then
+    export MANPATH=$HOME/share/man:$MANPATH
+fi
+# }}}
 # {{{ LANG -------------------------------------------------------------------
 # I am french but I like using my software in English :
 # We are going to set LANG=fr and LC_MESSAGES=en.
