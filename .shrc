@@ -45,6 +45,9 @@ export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 # }}}
 # {{{ ALIAS & FUNCTION -------------------------------------------------------
+# {{{ editor
+alias e=$EDITOR
+# }}}
 # {{{ ssh
 ssh_command=ssh
 command -v ssh_wrapper >/dev/null && {
@@ -76,6 +79,12 @@ alias sl=ls # often screw this up
 function duf {
     du -sk "$@" | sort -n | while read size fname; do for unit in k M G T P E Z Y; do if [ $size -lt 1024 ]; then echo -e "${size}${unit}\t${fname}"; break; fi; size=$((size/1024)); done; done
 }
+# }}}
+# {{{ etckeeper
+# If etckeeper is present, alias etckeeper to sudo etckeeper
+# and etckeepervcs to sudo etckeeper vcs
+alias etckeeper="sudo etckeeper"
+alias etckeepervcs="etckeeper vcs"
 # }}}
 # }}}
 # {{{ TERM --------------------------------------------------------------
