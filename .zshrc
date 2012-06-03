@@ -298,20 +298,6 @@ bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 # }}}
 # {{{ ALIAS ------------------------------------------------------------------
-# Sweet trick from zshwiki.org :-)
-cd () {
-  if (( $# != 1 )); then
-    builtin cd "$@"
-    return
-  fi
-
-  if [[ -f "$1" ]]; then
-    builtin cd "$1:h"
-  else
-    builtin cd "$1"
-  fi
-}
-
 z () {
   cd ~/"$1"
 }
@@ -396,8 +382,9 @@ hash -d www=/var/www
 hash -d sh=$HOME/.sh
 hash -d mr=$XDG_CONFIG_HOME/mr
 hash -d repo.d=$XDG_CONFIG_HOME/vcsh/repo.d
-hash -d work.d=$HOME/documents/work
+hash -d work.d=$HOME/desktop/work
 hash -d work.s=$HOME/src/work
+hash -d github=$HOME/src/github
 # few more default dirs {{{
 command -v xdg-user-dir >/dev/null && {
 hash -d pics=$(xdg-user-dir PICTURES)
