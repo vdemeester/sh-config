@@ -398,6 +398,10 @@ hash -d public=$(xdg-user-dir PUBLICSHARE)
 }
 # }}}
 # }}}
+# {{{ PLUGINS
+source $zdotdir/.sh/plugins/zaw/zaw.zsh
+bindkey '^x,' zaw
+# }}}
 # Load zshrc.d
 . $ZDOT_RUN_HOOKS .sh/hook/zshrc.post
 

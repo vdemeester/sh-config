@@ -1,2 +1,5 @@
-
+[$HOME/.sh/plugins/zaw]
+lib =
+    GITHUB_USER=zsh-users
+checkout = github_clone
 # vim:filetype=sh foldmethod=marker
