@@ -53,7 +53,10 @@ ssh_command=ssh
 command -v ssh_wrapper >/dev/null && {
     ssh_command=ssh_wrapper
 }
-alias ssh=$ssh_command
+#alias ssh=$ssh_command
+command -v keychain >/dev/null && {
+    alias ssh="eval \$(/usr/bin/keychain --eval --agents ssh -Q --quiet .ssh/id_rsa) && $ssh_command"
+}
 # }}}
 # {{{ tree
 alias tre='tree -C'
