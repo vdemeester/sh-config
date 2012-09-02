@@ -55,7 +55,7 @@ command -v ssh_wrapper >/dev/null && {
 }
 #alias ssh=$ssh_command
 command -v keychain >/dev/null && {
-    alias ssh="eval \$(/usr/bin/keychain --eval --agents ssh -Q --quiet .ssh/id_rsa) && $ssh_command"
+    alias ssh="eval \$(/usr/bin/keychain --eval --agents ssh -Q --quiet --nogui $HOME/.ssh/id_rsa) && $ssh_command"
 }
 # }}}
 # {{{ tree
