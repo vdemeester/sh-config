@@ -1,4 +1,7 @@
 *
+!bin
+!bin/trim-lines
+!bin/trim-whitespace
 !.env
 !.bashrc
 !.config
