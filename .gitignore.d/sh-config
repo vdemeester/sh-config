@@ -18,7 +18,6 @@
 !.sh/hook/shprofile.post/.placeholder
 !.sh/hook/zshrc.pre
 !.sh/hook/zshrc.pre/chroot
-!.sh/hook/zshrc.pre/git
 !.sh/hook/zshrc.post
 !.sh/hook/zshrc.post/history
 !.shenv
