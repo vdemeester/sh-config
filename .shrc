@@ -47,6 +47,7 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 # {{{ ALIAS & FUNCTION -------------------------------------------------------
 # {{{ editor
 alias e=$EDITOR
+alias :e=$EDITOR
 # }}}
 # {{{ ssh
 ssh_command=ssh
