@@ -7,4 +7,9 @@ checkout = github_clone
 lib =
     GITHUB_USER=zsh-users
 checkout = github_clone
+
+[$HOME/.sh/plugins/z]
+lib =
+    GITHUB_USER=rupa
+checkout = github_clone
 # vim:filetype=sh foldmethod=marker
