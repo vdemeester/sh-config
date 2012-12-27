@@ -115,10 +115,13 @@ _vde_setprompt () {
     setopt prompt_subst
     local return_code
 
-    PROMPT='%(!.$PR_RED%n.$PR_LIGHT_YELLOW${SSH_TTY:+$PR_MAGENTA}%n)$PR_GREY@$PR_LIGHT_CYAN${SSH_TTY:+$PR_MAGENTA}%m\
- $PR_LIGHT_GREY($PR_WHITE%D{%H:%M}$PR_LIGHT_GREY)\
-$PR_GREY in $PR_GREEN${SSH_TTY:+$PR_MAGENTA}%$PR_PWDLEN<...<%~%<< $PR_NO_COLOUR'$(_vde_add_lprompt)'
+    PROMPT='%(!.$PR_RED%n.$PR_LIGHT_YELLOW${SSH_TTY:+$PR_MAGENTA})$PR_WHITE${SSH_TTY:+$PR_MAGENTA}%m\
+$PR_GREY:$PR_GREEN${SSH_TTY:+$PR_MAGENTA}%$PR_PWDLEN<...<%~%<< $PR_NO_COLOUR'$(_vde_add_lprompt)'
 '$(_vde_add_rprompt)'%(!.${PR_RED}#.${PR_LIGHT_GREEN}%%)$PR_NO_COLOUR '
+#    PROMPT='%(!.$PR_RED%n.$PR_LIGHT_YELLOW${SSH_TTY:+$PR_MAGENTA}%n)$PR_GREY@$PR_LIGHT_CYAN${SSH_TTY:+$PR_MAGENTA}%m\
+# $PR_LIGHT_GREY($PR_WHITE%D{%H:%M}$PR_LIGHT_GREY)\
+#$PR_GREY in $PR_GREEN${SSH_TTY:+$PR_MAGENTA}%$PR_PWDLEN<...<%~%<< $PR_NO_COLOUR'$(_vde_add_lprompt)'
+#'$(_vde_add_rprompt)'%(!.${PR_RED}#.${PR_LIGHT_GREEN}%%)$PR_NO_COLOUR '
 #    PROMPT='$PR_SET_CHARSET\
 #$pR_CYAN$PR_SHIFT_IN$PR_ULCORNER$PR_HBAR$PR_SHIFT_OUT$PR_GREY(\
 #%(!.$PR_RED%n.${PR_GREEN}${SSH_TTY:+$PR_MAGENTA}%n)$PR_GREY@$PR_LIGHT_GREEN${SSH_TTY:+$PR_MAGENTA}%m\
