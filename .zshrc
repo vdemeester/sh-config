@@ -387,8 +387,6 @@ hash -d www=/var/www
 hash -d sh=$HOME/.sh
 hash -d mr=$XDG_CONFIG_HOME/mr
 hash -d repo.d=$XDG_CONFIG_HOME/vcsh/repo.d
-hash -d work.d=$HOME/desktop/work
-hash -d work.s=$HOME/src/work
 hash -d github=$HOME/src/github
 # few more default dirs {{{
 command -v xdg-user-dir >/dev/null && {
@@ -406,6 +404,7 @@ hash -d public=$(xdg-user-dir PUBLICSHARE)
 # {{{ PLUGINS
 source $zdotdir/.sh/plugins/zaw/zaw.zsh
 bindkey '^x,' zaw
+source $zdotdir/.sh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # }}}
 # Load zshrc.d
 . $ZDOT_RUN_HOOKS .sh/hook/zshrc.post
