@@ -14,7 +14,7 @@
 test -n "$INHERIT_ENV" && return 0
 test -n "$profile_loaded" && return 0
 
-sh_load_status .profile
+#sh_load_status .profile
 
 . $ZDOT_RUN_HOOKS .sh/hook/shprofile.pre
 
@@ -26,6 +26,13 @@ fi
 if [ ! -d $HOME/.local/tmp ]; then
     mkdir -p $HOME/.local/tmp
 fi
+
+# {{{ PATH
+test -d $HOME/.cabal/bin && {
+    export PATH=$HOME/.cabal/bin:$PATH
+}
+export PATH=$HOME/bin:$PATH
+# }}}
 
 . $ZDOT_RUN_HOOKS .sh/hook/shprofile.post
 
