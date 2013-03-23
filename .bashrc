@@ -48,14 +48,6 @@ if test `id -u` != 0; then
 fi
 # }}}
 
-load_rcfiles () {
-    for rcfile in ${SH}/rc/*.{sh,${CSHELL}}; do
-        . ${rcfile}
-    done
-}
-
-load_rcfiles
-
 HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
 HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
