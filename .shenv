@@ -119,7 +119,7 @@ if ! test -e $syspath; then
     echo "$PATH" 2>/dev/null > "$syspath"
 fi
 # Setting a fairly portable PATH
-PATH=/usr/local/bin:/usr/X11R6/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/games:/usr/games:/usr/local/git/bin
+PATH=/usr/local/bin:/usr/X11R6/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/games:/usr/games:/usr/local/git/bin:/opt/java/bin
 # Build PATH with common bin folders
 . $ZDOTDIR/.sh/functions/enable_wordsplit
 newpaths=
