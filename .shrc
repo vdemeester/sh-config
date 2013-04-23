@@ -58,6 +58,8 @@ command -v ssh_wrapper >/dev/null && {
 command -v keychain >/dev/null && {
     alias ssh="eval \$(/usr/bin/keychain --eval --agents ssh -Q --quiet --nogui $HOME/.ssh/id_rsa) && $ssh_command"
     alias scp="eval \$(/usr/bin/keychain --eval --agents ssh -Q --quiet --nogui $HOME/.ssh/id_rsa) && scp"
+    alias git="eval \$(/usr/bin/keychain --eval --agents ssh -Q --quiet --nogui $HOME/.ssh/id_rsa) && git"
+    alias mr="eval \$(/usr/bin/keychain --eval --agents ssh -Q --quiet --nogui $HOME/.ssh/id_rsa) && mr"
 }
 # }}}
 # {{{ tree
