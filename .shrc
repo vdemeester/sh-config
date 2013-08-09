@@ -93,6 +93,10 @@ function duf {
 alias etckeeper="sudo etckeeper"
 alias etckeepervcs="etckeeper vcs"
 # }}}
+# {{{ Tasks
+alias t="task"
+alias tx="task rc:~/.task.xgbi/rc"
+# }}}
 # }}}
 # {{{ TERM --------------------------------------------------------------
 if test "${COLORTERM}" = "gnome-terminal"; then
