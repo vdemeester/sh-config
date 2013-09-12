@@ -304,6 +304,8 @@ bindkey '^e^e' edit-command-line
 # History
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
+bindkey "^[OA" history-beginning-search-backward
+bindkey "^[OB" history-beginning-search-forward
 # }}}
 # {{{ ALIAS ------------------------------------------------------------------
 z () {
