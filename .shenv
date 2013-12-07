@@ -168,6 +168,13 @@ fi
 command -v vim >/dev/null && {
     export EDITOR=vim
 }
+command -v emacs >/dev/null && {
+    export EDITOR=emacs
+}
+command -v emacs >/dev/null && {
+    export EDITOR="emacsclient"
+    export ALTERNATE_EDITOR=""
+}
 # Prefer iceweasel as browser
 command -v iceweasel >/dev/null && {
     export BROWSER=iceweasel
