@@ -11,6 +11,17 @@
 #
 # Order: .zshenv, .zprofile, .zshrc, .zlogin
 # --------------------------------------------------------------------------- #
+if [[ $1 == eval ]]; then
+  shift
+  ICMD="$@"
+  set --
+  zle-line-init() {
+    BUFFER="$ICMD"
+    zle accept-line
+    zle -D zle-line-init
+  }
+  zle -N zle-line-init
+fi
 # Allow disabling of entire environment suite
 test -n "$INHERIT_ENV" && return 0
 
@@ -251,12 +262,28 @@ zstyle    ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
 zmodload -i zsh/complist
 bindkey -M menuselect "+" accept-and-menu-complete
 # }}}
+
 # {{{ KEYS -------------------------------------------------------------------
+# Force file name completion on C-x TAB, Shift-TAB.
+# From http://chneukirchen.org/blog/archive/2011/02/10-more-zsh-tricks-you-may-not-know.html
+zle -C complete-files complete-word _generic
+zstyle ':completion:complete-files:*' completer _files
+bindkey "^X^I" complete-files
+bindkey "^[[Z" complete-files
+# Force menu on C-x RET.
+zle -C complete-first complete-word _generic
+zstyle ':completion:complete-first:*' menu yes
+bindkey "^X^M" complete-first
+# Copy-earlier-word (M-.M-.M-m)
+# From http://chneukirchen.org/blog/archive/2013/03/10-fresh-zsh-tricks-you-may-not-know.html
+autoload -Uz copy-earlier-word
+zle -N copy-earlier-word
+bindkey "^[m" copy-earlier-word
 # insert Unicode character
 autoload      insert-unicode-char
 zle -N        insert-unicode-char
 bindkey '^xi' insert-unicode-char
-# "ctrl-e D" to insert the actual datetime YYYY/MM
+#o "ctrl-e D" to insert the actual datetime YYYY/MM
               __insert-datetime-directory() { BUFFER="$BUFFER$(date '+%Y/%m')"; CURSOR=$#BUFFER; }
 zle -N        __insert-datetime-directory
 bindkey '^eD' __insert-datetime-directory
@@ -271,7 +298,7 @@ zle -N        delete-whole-word-match
 bindkey "^ew" delete-whole-word-match
 
 # "ctrl-e ." to insert last typed word again
-              __insert-last-typed-word() { zle insert-last-word -- 0 -1 };
+              __insert-last-typed-word() { zle insert-last-word -- -1 -1 };
 zle -N        __insert-last-typed-word;
 bindkey "^e." __insert-last-typed-word
 # "ctrl-e q" to quote line
@@ -306,6 +333,22 @@ bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 bindkey "^[OA" history-beginning-search-backward
 bindkey "^[OB" history-beginning-search-forward
+# Better CTRL-R
+# From http://chneukirchen.org/blog/archive/2013/03/10-fresh-zsh-tricks-you-may-not-know.html
+autoload -Uz narrow-to-region
+function _history-incremental-preserving-pattern-search-backward
+{
+  local state
+  MARK=CURSOR  # magick, else multiple ^R don't work
+  narrow-to-region -p "$LBUFFER${BUFFER:+>>}" -P "${BUFFER:+<<}$RBUFFER" -S state
+  zle end-of-history
+  zle history-incremental-pattern-search-backward
+  narrow-to-region -R state
+}
+zle -N _history-incremental-preserving-pattern-search-backward
+bindkey "^R" _history-incremental-preserving-pattern-search-backward
+bindkey -M isearch "^R" history-incremental-pattern-search-backward
+bindkey "^S" history-incremental-pattern-search-forward
 # }}}
 # {{{ ALIAS ------------------------------------------------------------------
 z () {
@@ -427,3 +470,5 @@ fi
 # }}}
 
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4
+
+[ -s "/home/vincent/.nvm/nvm.sh" ] && . "/home/vincent/.nvm/nvm.sh" # This loads nvm

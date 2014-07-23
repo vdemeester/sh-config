@@ -2,6 +2,7 @@
 !bin
 !bin/trim-lines
 !bin/trim-whitespace
+!bin/zshi
 !.env
 !.bashrc
 !.config
