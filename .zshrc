@@ -351,9 +351,7 @@ bindkey -M isearch "^R" history-incremental-pattern-search-backward
 bindkey "^S" history-incremental-pattern-search-forward
 # }}}
 # {{{ ALIAS ------------------------------------------------------------------
-z () {
-  cd ~/"$1"
-}
+test -f $HOME/.sh/plugins/z/z.sh && . $HOME/.sh/plugins/z/z.sh
 # {{{ Renaming
 
 autoload zmv

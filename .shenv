@@ -158,6 +158,7 @@ export MANPATH=$HOME/share/man:$HOME/usr/share/man:/usr/share/man:$MANPATH
 # in English.
 if test "$(uname)" != "Darwin"; then
     export LANG=fr_FR.utf8
+    export LC_ALL=en_US.utf8
     export LC_MESSAGES=en_US.utf8
 fi
 # FIXME LANGUAGE seems to be the same as LC_MESSAGES. to confirm.
