@@ -99,6 +99,8 @@ if [[ "$terminfo[colors]" -ge 8 ]]; then
 colors
 fi
 for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE GREY; do
+    eval BG_PR_$color='%{$terminfo[bold]$bg[${(L)color}]%}'
+    eval BG_PR_LIGHT_$color='%{$bg[${(L)color}]%}'
     eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
     eval PR_LIGHT_$color='%{$fg[${(L)color}]%}'
     (( count = $count + 1 ))
@@ -126,7 +128,7 @@ _vde_setprompt () {
     setopt prompt_subst
     local return_code
 
-    PROMPT='%(!.$PR_RED%n.$PR_LIGHT_YELLOW${SSH_TTY:+$PR_MAGENTA})$PR_WHITE${SSH_TTY:+$PR_MAGENTA}%m\
+    PROMPT='%(!.$PR_RED%n.$PR_LIGHT_YELLOW${SSH_TTY:+$PR_MAGENTA})$PR_LIGHT_GREEN${SSH_TTY:+$PR_MAGENTA}%m\
 $PR_GREY $PR_GREEN${SSH_TTY:+$PR_MAGENTA}%$PR_PWDLEN<...<%~%<< $PR_NO_COLOUR'$(_vde_add_lprompt)'
 '$(_vde_add_rprompt)'%(!.${PR_RED}#.${PR_LIGHT_GREEN}%%)$PR_NO_COLOUR '
 #    PROMPT='%(!.$PR_RED%n.$PR_LIGHT_YELLOW${SSH_TTY:+$PR_MAGENTA}%n)$PR_GREY@$PR_LIGHT_CYAN${SSH_TTY:+$PR_MAGENTA}%m\
