@@ -435,7 +435,7 @@ hash -d www=/var/www
 hash -d sh=$HOME/.sh
 hash -d mr=$XDG_CONFIG_HOME/mr
 hash -d repo.d=$XDG_CONFIG_HOME/vcsh/repo.d
-hash -d github=$HOME/src/github
+hash -d gh=$HOME/src/github
 # few more default dirs {{{
 command -v xdg-user-dir >/dev/null && {
 hash -d wiki=$(xdg-user-dir DESKTOP)/wiki
