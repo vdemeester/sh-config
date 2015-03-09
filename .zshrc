@@ -428,7 +428,6 @@ alias -g EA9="|& awk '{print \$9}'"
 # }}}
 # {{{ HASHES -----------------------------------------------------------------
 hash -d deb=/var/cache/apt/archives
-hash -d doc=/usr/share/doc
 hash -d grub=/boot/grub
 hash -d log=/var/log
 hash -d www=/var/www
@@ -436,9 +435,11 @@ hash -d sh=$HOME/.sh
 hash -d mr=$XDG_CONFIG_HOME/mr
 hash -d repo.d=$XDG_CONFIG_HOME/vcsh/repo.d
 hash -d gh=$HOME/src/github
+hash -d exercism=$HOME/src/exercism
 # few more default dirs {{{
 command -v xdg-user-dir >/dev/null && {
-hash -d wiki=$(xdg-user-dir DESKTOP)/wiki
+hash -d docs=$(xdg-user-dir DOCUMENTS)
+hash -d org=$(xdg-user-dir DESKTOP)/org
 hash -d pics=$(xdg-user-dir PICTURES)
 hash -d pictures=$(xdg-user-dir PICTURES)
 hash -d downloads=$(xdg-user-dir DOWNLOAD)
