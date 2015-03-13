@@ -436,7 +436,7 @@ hash -d mr=$XDG_CONFIG_HOME/mr
 hash -d repo.d=$XDG_CONFIG_HOME/vcsh/repo.d
 hash -d gh=$HOME/src/github
 hash -d exercism=$HOME/src/exercism
-hash -d zen=$HOME/src/zenika
+hash -d znk=$HOME/src/zenika
 # few more default dirs {{{
 command -v xdg-user-dir >/dev/null && {
 hash -d docs=$(xdg-user-dir DOCUMENTS)
