@@ -128,6 +128,9 @@ _vde_setprompt () {
     setopt prompt_subst
     local return_code
 
+#    PROMPT='%(!.$PR_RED%n.$PR_LIGHT_YELLOW${SSH_TTY:+$PR_MAGENTA})$PR_LIGHT_GREEN${SSH_TTY:+$PR_MAGENTA}%m\
+#$PR_GREY $PR_GREEN${SSH_TTY:+$PR_MAGENTA}%$PR_PWDLEN<...<%~%<< $PR_NO_COLOUR'$(_vde_add_lprompt)'
+#'$(_vde_add_rprompt)'%(!.${PR_RED}#.${PR_LIGHT_GREEN}%%)$PR_NO_COLOUR '
     PROMPT='%(!.$PR_RED%n.$PR_LIGHT_YELLOW${SSH_TTY:+$PR_MAGENTA})$PR_LIGHT_GREEN${SSH_TTY:+$PR_MAGENTA}%m\
 $PR_GREY $PR_GREEN${SSH_TTY:+$PR_MAGENTA}%$PR_PWDLEN<...<%~%<< $PR_NO_COLOUR'$(_vde_add_lprompt)'
 '$(_vde_add_rprompt)'%(!.${PR_RED}#.${PR_LIGHT_GREEN}%%)$PR_NO_COLOUR '
@@ -437,6 +440,7 @@ hash -d repo.d=$XDG_CONFIG_HOME/vcsh/repo.d
 hash -d gh=$HOME/src/github
 hash -d exercism=$HOME/src/exercism
 hash -d znk=$HOME/src/zenika
+hash -d configs=$HOME/src/configs
 # few more default dirs {{{
 command -v xdg-user-dir >/dev/null && {
 hash -d docs=$(xdg-user-dir DOCUMENTS)
