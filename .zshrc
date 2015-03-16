@@ -132,7 +132,7 @@ _vde_setprompt () {
 #$PR_GREY $PR_GREEN${SSH_TTY:+$PR_MAGENTA}%$PR_PWDLEN<...<%~%<< $PR_NO_COLOUR'$(_vde_add_lprompt)'
 #'$(_vde_add_rprompt)'%(!.${PR_RED}#.${PR_LIGHT_GREEN}%%)$PR_NO_COLOUR '
 
-    PROMPT='%(!.$PR_RED%n.$PR_LIGHT_GREEN)${SSH_TTY:+$BG_PR_WHITE$PR_LIGHT_GREY %n@%m }\
+    PROMPT='$BG_PR_WHITE$PR_LIGHT_GREY%(!.%n@%m.$PR_LIGHT_GREEN)${SSH_TTY:+$BG_PR_WHITE$PR_LIGHT_GREY %n@%m }\
 $PR_WHITE$BG_PR_GREY $PR_LIGHT_WHITE%$PR_PWDLEN<...<%~%<< $PR_NO_COLOUR'$(_vde_add_lprompt)'
 '$(_vde_add_rprompt)'%(!.${PR_RED}#.${PR_GREEN}%%)$PR_NO_COLOUR '
 
