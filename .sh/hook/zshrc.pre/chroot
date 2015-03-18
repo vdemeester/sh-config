@@ -8,8 +8,7 @@
 # {{{ PROMPT -----------------------------------------------------------------
 [[ -z $SCHROOT_CHROOT_NAME ]] || {
     _vde_add_rprompt_chroot () {
-        print -n '${PR_CYAN}$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT'
-        print -n '${PR_GREY}(${PR_YELLOW}sch:${PR_NO_COLOUR}${SCHROOT_CHROOT_NAME}${PR_GREY})'
+        print -n '${BG_PR_BLUE}sch:${PR_WHITE}${SCHROOT_CHROOT_NAME}'
     }
 }
 #[[ -z SCHROOT_SESSION_ID ]] || {
