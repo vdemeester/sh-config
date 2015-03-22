@@ -428,6 +428,7 @@ hash -d gh=$HOME/src/github
 hash -d exercism=$HOME/src/exercism
 hash -d znk=$HOME/src/zenika
 hash -d configs=$HOME/src/configs
+hash -d sites=$HOME/src/sites
 # few more default dirs {{{
 command -v xdg-user-dir >/dev/null && {
 hash -d docs=$(xdg-user-dir DOCUMENTS)
