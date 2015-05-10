@@ -430,10 +430,14 @@ hash -d znk=$HOME/src/zenika
 hash -d configs=$HOME/src/configs
 hash -d sites=$HOME/src/sites
 hash -d docker=$HOME/src/docker
+hash -d ansibles=$HOME/src/ansibles
+hash -d experiments=$HOME/src/experiments
 # few more default dirs {{{
 command -v xdg-user-dir >/dev/null && {
 hash -d docs=$(xdg-user-dir DOCUMENTS)
 hash -d org=$(xdg-user-dir DESKTOP)/org
+hash -d notes=$(xdg-user-dir DESKTOP)/org/notes
+hash -d todos=$(xdg-user-dir DESKTOP)/org/todos
 hash -d pics=$(xdg-user-dir PICTURES)
 hash -d pictures=$(xdg-user-dir PICTURES)
 hash -d downloads=$(xdg-user-dir DOWNLOAD)
