@@ -147,6 +147,9 @@ PATH=$newpaths:$PATH
 if test -d /usr/bin/core_perl; then
     PATH=$PATH:/usr/bin/core_perl/
 fi
+if test -d $HOME/.local/bin; then
+    PATH=$PATH:$HOME/.local/bin
+fi
 # }}}
 # {{{ MANPATH --------------------------------------------------------------- #
 export MANPATH=$HOME/share/man:$HOME/usr/share/man:/usr/share/man:$MANPATH
