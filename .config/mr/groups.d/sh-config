@@ -8,6 +8,11 @@ lib =
     GITHUB_USER=zsh-users
 checkout = github_clone
 
+[$HOME/.sh/plugins/zsh-autosuggestions]
+lib = 
+    GITHUB_USER=tarruda
+checkout = github_clone
+
 [$HOME/.sh/plugins/z]
 lib =
     GITHUB_USER=rupa
