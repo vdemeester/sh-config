@@ -7,6 +7,7 @@
 setopt EXTENDED_HISTORY 
 setopt SHARE_HISTORY # _all
 setopt HIST_IGNORE_ALL_DUPS # ignores duplications
+setopt histignorespace
 
 if ! test -d "$HOME/.local/run"; then
     mkdir -p "$HOME/.local/run"
