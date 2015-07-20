@@ -427,6 +427,7 @@ hash -d repo.d=$XDG_CONFIG_HOME/vcsh/repo.d
 hash -d gh=$HOME/src/github
 hash -d exercism=$HOME/src/exercism
 hash -d znk=$HOME/src/zenika
+hash -d jcd=$HOME/src/jcdecaux
 hash -d configs=$HOME/src/configs
 hash -d sites=$HOME/src/sites
 hash -d docker=$HOME/src/docker
