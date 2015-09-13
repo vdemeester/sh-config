@@ -3,11 +3,13 @@ lib =
     GITHUB_USER=zsh-users
 checkout = github_clone
 
+# Segfault for now..
 [$HOME/.sh/plugins/zsh-syntax-highlighting]
 lib =
     GITHUB_USER=zsh-users
 checkout = github_clone
 
+# Segfault for now..
 [$HOME/.sh/plugins/zsh-autosuggestions]
 lib = 
     GITHUB_USER=tarruda

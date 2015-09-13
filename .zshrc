@@ -453,14 +453,14 @@ hash -d public=$(xdg-user-dir PUBLICSHARE)
 # {{{ PLUGINS
 source $zdotdir/.sh/plugins/zaw/zaw.zsh
 bindkey '^x,' zaw
-source $zdotdir/.sh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $zdotdir/.sh/plugins/zsh-autosuggestions/autosuggestions.zsh
-AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=4'
-bindkey '^T' autosuggest-toggle
-zle-line-init() {
-    zle autosuggest-start
-}
-zle -N zle-line-init
+#source $zdotdir/.sh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source $zdotdir/.sh/plugins/zsh-autosuggestions/autosuggestions.zsh
+#AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=4'
+#bindkey '^T' autosuggest-toggle
+#zle-line-init() {
+#    zle autosuggest-start
+#}
+#zle -N zle-line-init
 # }}}
 # Load zshrc.d
 . $ZDOT_RUN_HOOKS .sh/hook/zshrc.post
