@@ -430,7 +430,8 @@ hash -d znk=$HOME/src/zenika
 hash -d jcd=$HOME/src/jcdecaux
 hash -d configs=$HOME/src/configs
 hash -d sites=$HOME/src/sites
-hash -d docker=$HOME/src/docker
+hash -d docker=$HOME/lib/go/src/github.com/docker
+hash -d traefik=$HOME/lib/go/src/github.com/emilevauge
 hash -d ansibles=$HOME/src/configs/ansibles
 hash -d experiments=$HOME/src/experiments
 # few more default dirs {{{
