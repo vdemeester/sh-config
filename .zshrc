@@ -415,6 +415,15 @@ alias -g EA8="|& awk '{print \$8}'"
 alias -g EA9="|& awk '{print \$9}'"
 
 # }}}
+# {{{ docker
+function docker() {
+    test -x /usr/bin/docker-x && {
+        /usr/bin/docker-x "$@"
+    } || {
+        /usr/bin/docker "$@"
+    }
+}
+# }}}
 # }}}
 # {{{ HASHES -----------------------------------------------------------------
 hash -d deb=/var/cache/apt/archives
