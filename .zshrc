@@ -447,10 +447,8 @@ hash -d runcom=$HOME/lib/go/src/github.com/runcom
 hash -d vdemeester=$HOME/lib/go/src/github.com/vdemeester
 hash -d calavera=$HOME/lib/go/src/github.com/calavera
 hash -d jfrazelle=$HOME/lib/go/src/github.com/jfrazelle
+hash -d containous=$HOME/lib/go/src/github.com/containous
 hash -d emilevauge=$HOME/lib/go/src/github.com/emilevauge
-hash -d libkermit=$HOME/lib/go/src/github.com/vdemeester/libkermit
-hash -d shakers=$HOME/lib/go/src/github.com/vdemeester/shakers
-hash -d traefik=$HOME/lib/go/src/github.com/emilevauge/traefik
 hash -d ansibles=$HOME/src/configs/ansibles
 hash -d experiments=$HOME/src/experiments
 # few more default dirs {{{
