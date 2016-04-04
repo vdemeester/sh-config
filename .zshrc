@@ -168,7 +168,15 @@ _vde_add_rprompt () {
 }
 # }}}
 # Call setprompt !
-_vde_setprompt
+if [[ $TERM == "dumb" ]]; then
+    unsetopt zle
+    unsetopt prompt_cr
+    unsetopt prompt_subst
+    unsetopt precmd
+    unsetopt preexec
+else
+    _vde_setprompt
+fi
 # }}}
 # {{{ OPTIONS ----------------------------------------------------------------
 if [ ${ZSH_VERSION//\./} -ge 420 ]; then
