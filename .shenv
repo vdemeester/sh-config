@@ -167,6 +167,9 @@ fi
 # FIXME LANGUAGE seems to be the same as LC_MESSAGES. to confirm.
 # FIXME What about darwin stuff ?
 # }}}
+# Export IM methods for making firefox & co taking XCompose into account
+export GTK_IM_MODULE=xim
+export QT_IM_MODULE=xim
 # {{{ EDITOR and common main env. var. ---------------------------------------
 # vim is my EDITOR of choice
 command -v vim >/dev/null && {
