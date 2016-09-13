@@ -114,42 +114,42 @@ export USER USERNAME
 # }}}
 # {{{ PATH -------------------------------------------------------------------
 # Save system-wid PATH for reference, but should we trust it ?
-syspath=$HOME/.syspath.$HOST
-if ! test -e $syspath; then
-    echo "$PATH" 2>/dev/null > "$syspath"
-fi
+#syspath=$HOME/.syspath.$HOST
+#if ! test -e $syspath; then
+#    echo "$PATH" 2>/dev/null > "$syspath"
+#fi
 # Setting a fairly portable PATH
-PATH=/usr/local/bin:/usr/X11R6/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/games:/usr/games:/usr/local/git/bin:/opt/java/bin
+#PATH=/usr/local/bin:/usr/X11R6/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/games:/usr/games:/usr/local/git/bin:/opt/java/bin
 # Build PATH with common bin folders
-. $ZDOTDIR/.sh/functions/enable_wordsplit
-newpaths=
-for dir in $ZDOTDIRREVPATH; do
-    for newpath in                          \
-                    $dir/sbin               \
-                    $dir/bin                \
-                    $dir/bin/$OSTYPE        \
-                    $dir/sbin               \
-                    $dir/pkg/bin            \
-                    $dir/usr/bin            \
-                    $dir/usr/sbin            \
-    ; do
-        if test -d $newpath; then
-            if test -z "$newpaths"; then
-                newpaths=$newpath
-            else
-                newpaths=$newpaths:$newpath
-            fi
-        fi
-    done
-done
-restore_wordsplit
-PATH=$newpaths:$PATH
-if test -d /usr/bin/core_perl; then
-    PATH=$PATH:/usr/bin/core_perl/
-fi
-if test -d $HOME/.local/bin; then
-    PATH=$PATH:$HOME/.local/bin
-fi
+#. $ZDOTDIR/.sh/functions/enable_wordsplit
+#newpaths=
+#for dir in $ZDOTDIRREVPATH; do
+#    for newpath in                          \
+#                    $dir/sbin               \
+#                    $dir/bin                \
+#                    $dir/bin/$OSTYPE        \
+#                    $dir/sbin               \
+#                    $dir/pkg/bin            \
+#                    $dir/usr/bin            \
+#                    $dir/usr/sbin            \
+#    ; do
+#        if test -d $newpath; then
+#            if test -z "$newpaths"; then
+#                newpaths=$newpath
+#            else
+#                newpaths=$newpaths:$newpath
+#            fi
+#        fi
+#    done
+#done
+#restore_wordsplit
+#PATH=$newpaths:$PATH
+#if test -d /usr/bin/core_perl; then
+#    PATH=$PATH:/usr/bin/core_perl/
+#fi
+#if test -d $HOME/.local/bin; then
+#    PATH=$PATH:$HOME/.local/bin
+#fi
 # }}}
 # {{{ MANPATH --------------------------------------------------------------- #
 export MANPATH=$HOME/share/man:$HOME/usr/share/man:/usr/share/man:$MANPATH
