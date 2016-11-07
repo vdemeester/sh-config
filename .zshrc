@@ -457,6 +457,8 @@ hash -d calavera=$HOME/lib/go/src/github.com/calavera
 hash -d jfrazelle=$HOME/lib/go/src/github.com/jfrazelle
 hash -d containous=$HOME/lib/go/src/github.com/containous
 hash -d emilevauge=$HOME/lib/go/src/github.com/emilevauge
+hash -d dnephin=$HOME/lib/go/src/github.com/dnephin
+hash -d aanand=$HOME/lib/go/src/github.com/aanand
 hash -d ansibles=$HOME/src/configs/ansibles
 hash -d libkermit=$HOME/lib/go/src/github.com/libkermit
 hash -d experiments=$HOME/src/experiments
@@ -504,5 +506,6 @@ fi
 # }}}
 
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4
+if [ -e /home/vincent/.nix-profile/etc/profile.d/nix.sh ]; then . /home/vincent/.nix-profile/etc/profile.d/nix.sh; fi
 
 [ -s "/home/vincent/.nvm/nvm.sh" ] && . "/home/vincent/.nvm/nvm.sh" # This loads nvm

@@ -38,3 +38,4 @@ export PATH=$HOME/bin:$PATH
 
 profile_loaded=y
 # vim:filetype=sh foldmethod=marker autoindent expandtab shiftwidth=4
+if [ -e /home/vincent/.nix-profile/etc/profile.d/nix.sh ]; then . /home/vincent/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
