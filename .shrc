@@ -1,3 +1,4 @@
+# -*- mode: sh; -*-
 # Filename:     .shrc
 # Authors:      Vincent Demeester
 # License:      This file is licensed under the GPL v2.
@@ -90,25 +91,6 @@ function duf {
     du -sk "$@" | sort -n | while read size fname; do for unit in k M G T P E Z Y; do if [ $size -lt 1024 ]; then echo -e "${size}${unit}\t${fname}"; break; fi; size=$((size/1024)); done; done
 }
 # }}}
-# {{{ etckeeper
-# If etckeeper is present, alias etckeeper to sudo etckeeper
-# and etckeepervcs to sudo etckeeper vcs
-alias etckeeper="sudo etckeeper"
-alias etckeepervcs="etckeeper vcs"
-# }}}
-# {{{ Tasks
-alias t="task"
-alias tx="task rc:~/.task.xgbi/rc"
-# }}}
-# }}}
-# {{{ TERM --------------------------------------------------------------
-if test "${COLORTERM}" = "gnome-terminal"; then
-    if test -e /usr/share/terminfo/x/xterm-256color || test -e /lib/terminfo/x/xterm-256color; then
-        export TERM="xterm-256color"
-    else
-        export TERM="xterm-color"
-    fi
-fi
 # }}}
 # Load shrc hooks (if present)
 . $ZDOT_RUN_HOOKS .sh/hook/shrc.post

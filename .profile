@@ -1,3 +1,4 @@
+# -*- mode: sh; -*-
 # Filename:     .profile
 # Authors:      Vincent Demeester
 # License:      This file is licensed under the GPL v2.
@@ -18,24 +19,13 @@ test -n "$profile_loaded" && return 0
 
 . $ZDOT_RUN_HOOKS .sh/hook/shprofile.pre
 
-# init me !
-# FIXME This should go elsewhere (in hooks probably)
-if [ ! -d $HOME/.local/log ]; then
-    mkdir -p $HOME/.local/log
-fi
-if [ ! -d $HOME/.local/tmp ]; then
-    mkdir -p $HOME/.local/tmp
-fi
+# Nothing to do ?
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+    . $HOME/.nix-profile/etc/profile.d/nix.sh
+fi # added by Nix installer
 
-# {{{ PATH
-test -d $HOME/.cabal/bin && {
-    export PATH=$HOME/.cabal/bin:$PATH
-}
-export PATH=$HOME/bin:$PATH
-# }}}
 
 . $ZDOT_RUN_HOOKS .sh/hook/shprofile.post
 
 profile_loaded=y
 # vim:filetype=sh foldmethod=marker autoindent expandtab shiftwidth=4
-if [ -e /home/vincent/.nix-profile/etc/profile.d/nix.sh ]; then . /home/vincent/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

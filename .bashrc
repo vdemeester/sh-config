@@ -1,6 +1,6 @@
+# -*- mode: sh; -*-
 # bashrc file
 CSHELL="bash"
-# This file is sourced when starting bash.
 SH="${SHFOLDER:-$HOME}/.sh"
 
 # If not running interactively, don't do anything

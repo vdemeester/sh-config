@@ -1,3 +1,4 @@
+# -*- mode: sh; -*-
 # Filename:     .zshrc
 # Authors:      Vincent Demeester
 # License:      This file is licensed under the GPL v2.
@@ -12,15 +13,15 @@
 # Order: .zshenv, .zprofile, .zshrc, .zlogin
 # --------------------------------------------------------------------------- #
 if [[ $1 == eval ]]; then
-  shift
-  ICMD="$@"
-  set --
-  zle-line-init() {
-    BUFFER="$ICMD"
-    zle accept-line
-    zle -D zle-line-init
-  }
-  zle -N zle-line-init
+    shift
+    ICMD="$@"
+    set --
+    zle-line-init() {
+        BUFFER="$ICMD"
+        zle accept-line
+        zle -D zle-line-init
+    }
+    zle -N zle-line-init
 fi
 # Allow disabling of entire environment suite
 test -n "$INHERIT_ENV" && return 0
@@ -86,7 +87,7 @@ if (( $+functions[add-zsh-hook] )); then
     add-zsh-hook precmd _vde_prompt_precmd
 else
     precmd () {
-    _vde_prompt_precmd
+        _vde_prompt_precmd
     }
 fi
 # }}}
@@ -96,7 +97,7 @@ fi
 
 autoload colors zsh/terminfo
 if [[ "$terminfo[colors]" -ge 8 ]]; then
-colors
+    colors
 fi
 for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE GREY; do
     eval BG_PR_$color='%{$terminfo[bold]$bg[${(L)color}]%}'
@@ -128,9 +129,9 @@ _vde_setprompt () {
     setopt prompt_subst
     local return_code
 
-#    PROMPT='%(!.$PR_RED%n.$PR_LIGHT_YELLOW${SSH_TTY:+$PR_MAGENTA})$PR_LIGHT_GREEN${SSH_TTY:+$PR_MAGENTA}%m\
-#$PR_GREY $PR_GREEN${SSH_TTY:+$PR_MAGENTA}%$PR_PWDLEN<...<%~%<< $PR_NO_COLOUR'$(_vde_add_lprompt)'
-#'$(_vde_add_rprompt)'%(!.${PR_RED}#.${PR_LIGHT_GREEN}%%)$PR_NO_COLOUR '
+    #    PROMPT='%(!.$PR_RED%n.$PR_LIGHT_YELLOW${SSH_TTY:+$PR_MAGENTA})$PR_LIGHT_GREEN${SSH_TTY:+$PR_MAGENTA}%m\
+        #$PR_GREY $PR_GREEN${SSH_TTY:+$PR_MAGENTA}%$PR_PWDLEN<...<%~%<< $PR_NO_COLOUR'$(_vde_add_lprompt)'
+    #'$(_vde_add_rprompt)'%(!.${PR_RED}#.${PR_LIGHT_GREEN}%%)$PR_NO_COLOUR '
 
     PROMPT='$BG_PR_WHITE$PR_LIGHT_GREY%(!.%n@%m.$PR_LIGHT_GREEN)${SSH_TTY:+$BG_PR_WHITE$PR_LIGHT_GREY %n@%m }\
 $PR_WHITE$BG_PR_GREY $PR_LIGHT_WHITE%$PR_PWDLEN<...<%~%<< $PR_NO_COLOUR'$(_vde_add_lprompt)'
@@ -143,8 +144,8 @@ $PR_WHITE$BG_PR_GREY $PR_LIGHT_WHITE%$PR_PWDLEN<...<%~%<< $PR_NO_COLOUR'$(_vde_a
         return_code="%(?..%{$PR_RED%}<%?> $PR_NO_COLOUR)"
     fi
     RPROMPT=' '$return_code''
-#    RPROMPT=' '$return_code''$(_vde_add_rprompt)'$PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_LIGHT_CYAN$PR_HBAR$PR_SHIFT_OUT\
-#$PR_GREY($PR_WHITE%D{%H:%M}$PR_GREY)$PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_LRCORNER$PR_SHIFT_OUT$PR_NO_COLOUR'
+    #    RPROMPT=' '$return_code''$(_vde_add_rprompt)'$PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_LIGHT_CYAN$PR_HBAR$PR_SHIFT_OUT\
+        #$PR_GREY($PR_WHITE%D{%H:%M}$PR_GREY)$PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_LRCORNER$PR_SHIFT_OUT$PR_NO_COLOUR'
 
     PS2='$PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT\
 $PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT$PR_GREY(\
@@ -201,7 +202,7 @@ unsetopt list_beep
 zstyle ':completion:*' completer _complete _prefix _ignored _complete:-extended
 # e.g. f-1.j<TAB> would complete to foo-123.jpeg
 zstyle ':completion:*:complete-extended:*' \
-  matcher 'r:|[.,_-]=* r:|=*'
+       matcher 'r:|[.,_-]=* r:|=*'
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt ''
 zstyle ':completion:*' group-name ''
@@ -217,7 +218,7 @@ zstyle ':completion:*' squeeze-slashes 'yes'
 # {{{ Include non-hidden dirs in globbed file completions for certain commands
 
 #zstyle ':completion::complete:*' \
-#  tag-order 'globbed-files directories' all-files 
+    #  tag-order 'globbed-files directories' all-files
 #zstyle ':completion::complete:*:tar:directories' file-patterns '*~.*(-/)'
 
 # }}}
@@ -229,13 +230,13 @@ zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
 # {{{ Don't complete uninteresting users
 
 zstyle ':completion:*:*:*:users' ignored-patterns \
-        adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
-        dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
-        hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
-        mailman mailnull mldonkey mysql nagios \
-        named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
-        operator pcap postfix postgres privoxy pulse pvm quagga radvd \
-        rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs
+       adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
+       dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
+       hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
+       mailman mailnull mldonkey mysql nagios \
+       named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
+       operator pcap postfix postgres privoxy pulse pvm quagga radvd \
+       rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs
 
 # ... unless we really want to.
 zstyle '*' single-ignored show
@@ -247,7 +248,7 @@ zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path $ZSH/run/cache/
 zstyle ':completion:*:descriptions' format '%B%d%b'
 zstyle    ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
-                                  /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
+          /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 # this will include newly installed programs into tab completion
 _force_rehash() { (( CURRENT == 1 )) && rehash return 1 }
 zstyle    ':completion:*' completers _force_rehash
@@ -284,12 +285,12 @@ autoload      insert-unicode-char
 zle -N        insert-unicode-char
 bindkey '^xi' insert-unicode-char
 #o "ctrl-e D" to insert the actual datetime YYYY/MM
-              __insert-datetime-directory() { BUFFER="$BUFFER$(date '+%Y/%m')"; CURSOR=$#BUFFER; }
+__insert-datetime-directory() { BUFFER="$BUFFER$(date '+%Y/%m')"; CURSOR=$#BUFFER; }
 zle -N        __insert-datetime-directory
 bindkey '^eD' __insert-datetime-directory
 
 # "ctrl-e d" to insert the actual datetime YYYY-MM-DD--hh-mm-ss-TZ
-              __insert-datetime-default() { BUFFER="$BUFFER$(date '+%F--%H-%M-%S-%Z')"; CURSOR=$#BUFFER; }
+__insert-datetime-default() { BUFFER="$BUFFER$(date '+%F--%H-%M-%S-%Z')"; CURSOR=$#BUFFER; }
 zle -N        __insert-datetime-default
 bindkey '^ed' __insert-datetime-default
 # "ctrl-e w" to delete to prior whitespace
@@ -298,28 +299,28 @@ zle -N        delete-whole-word-match
 bindkey "^ew" delete-whole-word-match
 
 # "ctrl-e ." to insert last typed word again
-              __insert-last-typed-word() { zle insert-last-word -- -1 -1 };
+__insert-last-typed-word() { zle insert-last-word -- -1 -1 };
 zle -N        __insert-last-typed-word;
 bindkey "^e." __insert-last-typed-word
 # "ctrl-e q" to quote line
 __quote_line () {
-	zle beginning-of-line
-	zle forward-word
-	RBUFFER=${(q)RBUFFER}
-	zle end-of-line
+    zle beginning-of-line
+    zle forward-word
+    RBUFFER=${(q)RBUFFER}
+    zle end-of-line
 }
 zle -N        __quote_line
 bindkey '^eq' __quote_line
 # "ctrl-e 1" to jump behind the first word on the cmdline
 function __jump_behind_first_word() {
-	local words
-	words=(${(z)BUFFER})
+    local words
+    words=(${(z)BUFFER})
 
-	if (( ${#words} <= 1 )) ; then
-		CURSOR=${#BUFFER}
-	else
-		CURSOR=${#${words[1]}}
-	fi
+    if (( ${#words} <= 1 )) ; then
+        CURSOR=${#BUFFER}
+    else
+        CURSOR=${#${words[1]}}
+    fi
 }
 zle -N        __jump_behind_first_word
 bindkey '^e1' __jump_behind_first_word
@@ -338,12 +339,12 @@ bindkey "^[OB" history-beginning-search-forward
 autoload -Uz narrow-to-region
 function _history-incremental-preserving-pattern-search-backward
 {
-  local state
-  MARK=CURSOR  # magick, else multiple ^R don't work
-  narrow-to-region -p "$LBUFFER${BUFFER:+>>}" -P "${BUFFER:+<<}$RBUFFER" -S state
-  zle end-of-history
-  zle history-incremental-pattern-search-backward
-  narrow-to-region -R state
+    local state
+    MARK=CURSOR  # magick, else multiple ^R don't work
+    narrow-to-region -p "$LBUFFER${BUFFER:+>>}" -P "${BUFFER:+<<}$RBUFFER" -S state
+    zle end-of-history
+    zle history-incremental-pattern-search-backward
+    narrow-to-region -R state
 }
 zle -N _history-incremental-preserving-pattern-search-backward
 bindkey "^R" _history-incremental-preserving-pattern-search-backward
@@ -423,73 +424,44 @@ alias -g EA8="|& awk '{print \$8}'"
 alias -g EA9="|& awk '{print \$9}'"
 
 # }}}
-# {{{ docker
-#function docker() {
-#    test -x /usr/bin/docker-x && {
-#        /usr/bin/docker-x "$@"
-#    } || {
-#        /usr/bin/docker "$@"
-#    }
-#}
-# }}}
 # }}}
 # {{{ HASHES -----------------------------------------------------------------
-hash -d deb=/var/cache/apt/archives
-hash -d grub=/boot/grub
-hash -d log=/var/log
-hash -d www=/var/www
 hash -d sh=$HOME/.sh
-hash -d mr=$XDG_CONFIG_HOME/mr
-hash -d repo.d=$XDG_CONFIG_HOME/vcsh/repo.d
 hash -d gh=$HOME/src/github
 hash -d exercism=$HOME/src/exercism
-hash -d znk=$HOME/src/zenika
-hash -d jcd=$HOME/src/jcdecaux
 hash -d configs=$HOME/src/configs
+hash -d nix=$HOME/src/nix
 hash -d sites=$HOME/src/sites
-hash -d go=$HOME/lib/go/src
-hash -d docker=$HOME/lib/go/src/github.com/docker
-hash -d rancher=$HOME/lib/go/src/github.com/rancher
-hash -d opencontainers=$HOME/lib/go/src/github.com/opencontainers
-hash -d runcom=$HOME/lib/go/src/github.com/runcom
-hash -d vdemeester=$HOME/lib/go/src/github.com/vdemeester
-hash -d calavera=$HOME/lib/go/src/github.com/calavera
-hash -d jfrazelle=$HOME/lib/go/src/github.com/jfrazelle
-hash -d containous=$HOME/lib/go/src/github.com/containous
-hash -d emilevauge=$HOME/lib/go/src/github.com/emilevauge
-hash -d dnephin=$HOME/lib/go/src/github.com/dnephin
-hash -d aanand=$HOME/lib/go/src/github.com/aanand
-hash -d ansibles=$HOME/src/configs/ansibles
-hash -d libkermit=$HOME/lib/go/src/github.com/libkermit
+hash -d go=$HOME/go/src
+hash -d docker=$HOME/go/src/github.com/docker
+hash -d rancher=$HOME/go/src/github.com/rancher
+hash -d opencontainers=$HOME/go/src/github.com/opencontainers
+hash -d runcom=$HOME/go/src/github.com/runcom
+hash -d vdemeester=$HOME/go/src/github.com/vdemeester
+hash -d calavera=$HOME/go/src/github.com/calavera
+hash -d jfrazelle=$HOME/go/src/github.com/jfrazelle
+hash -d containous=$HOME/go/src/github.com/containous
+hash -d emilevauge=$HOME/go/src/github.com/emilevauge
+hash -d dnephin=$HOME/go/src/github.com/dnephin
+hash -d aanand=$HOME/go/src/github.com/aanand
+hash -d libkermit=$HOME/go/src/github.com/libkermit
 hash -d experiments=$HOME/src/experiments
 # few more default dirs {{{
 command -v xdg-user-dir >/dev/null && {
-hash -d docs=$(xdg-user-dir DOCUMENTS)
-hash -d org=$(xdg-user-dir DESKTOP)/org
-hash -d notes=$(xdg-user-dir DESKTOP)/org/notes
-hash -d todos=$(xdg-user-dir DESKTOP)/org/todos
-hash -d pics=$(xdg-user-dir PICTURES)
-hash -d pictures=$(xdg-user-dir PICTURES)
-hash -d downloads=$(xdg-user-dir DOWNLOAD)
-hash -d dls=$(xdg-user-dir DOWNLOAD)
-hash -d music=$(xdg-user-dir MUSIC)
-hash -d videos=$(xdg-user-dir VIDEOS)
-hash -d templates=$(xdg-user-dir TEMPLATES)
-hash -d public=$(xdg-user-dir PUBLICSHARE)
+    hash -d docs=$(xdg-user-dir DOCUMENTS)
+    hash -d org=$(xdg-user-dir DESKTOP)/org
+    hash -d notes=$(xdg-user-dir DESKTOP)/org/notes
+    hash -d todos=$(xdg-user-dir DESKTOP)/org/todos
+    hash -d pics=$(xdg-user-dir PICTURES)
+    hash -d pictures=$(xdg-user-dir PICTURES)
+    hash -d downloads=$(xdg-user-dir DOWNLOAD)
+    hash -d dls=$(xdg-user-dir DOWNLOAD)
+    hash -d music=$(xdg-user-dir MUSIC)
+    hash -d videos=$(xdg-user-dir VIDEOS)
+    hash -d templates=$(xdg-user-dir TEMPLATES)
+    hash -d public=$(xdg-user-dir PUBLICSHARE)
 }
 # }}}
-# }}}
-# {{{ PLUGINS
-source $zdotdir/.sh/plugins/zaw/zaw.zsh
-bindkey '^x,' zaw
-#source $zdotdir/.sh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source $zdotdir/.sh/plugins/zsh-autosuggestions/autosuggestions.zsh
-#AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=4'
-#bindkey '^T' autosuggest-toggle
-#zle-line-init() {
-#    zle autosuggest-start
-#}
-#zle -N zle-line-init
 # }}}
 # Load zshrc.d
 . $ZDOT_RUN_HOOKS .sh/hook/zshrc.post
@@ -498,14 +470,11 @@ bindkey '^x,' zaw
 # We clean if in login mode, else, there is zlogin that comes after.
 if test -z "$shell_login"; then
     if [[ $TERM == tgtelnet ]]; then
-      echo
+        echo
     else
-      echo -n "\r"
+        echo -n "\r"
     fi
 fi
 # }}}
 
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4
-if [ -e /home/vincent/.nix-profile/etc/profile.d/nix.sh ]; then . /home/vincent/.nix-profile/etc/profile.d/nix.sh; fi
-
-[ -s "/home/vincent/.nvm/nvm.sh" ] && . "/home/vincent/.nvm/nvm.sh" # This loads nvm

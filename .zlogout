@@ -1,3 +1,4 @@
+# -*- mode: sh; -*-
 # Filename:     .zlogout
 # Authors:      Vincent Demeester
 # License:      This file is licensed under the GPL v2.

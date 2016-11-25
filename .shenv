@@ -1,8 +1,9 @@
+# -*- mode: sh; -*-
 # Filename:     .shenv
 # Authors:      Vincent Demeester
 # License:      This file is licensed under the GPL v2.
 # --------------------------------------------------------------------------- #
-# This file should be sourced on all invocations of "any" posix shell 
+# This file should be sourced on all invocations of "any" posix shell
 # (for $USER). It has to be sourced by .zshenv and similar. It should be kept
 # as fast and as portable as possible.
 # --------------------------------------------------------------------------- #
@@ -14,13 +15,13 @@ test -n "$shenv_loaded" && return 0
 # {{{ Are we interactive ? ---------------------------------------------------
 case "$-" in
     *i*) shell_interactive=y ;;
-      *) shell_interactive=  ;;
+    *) shell_interactive=  ;;
 esac
 # }}}
 # {{{ Are we login ? ---------------------------------------------------------
 case "$-" in
     *l*) shell_login=y ;;
-      *) shell_login=  ;;
+    *) shell_login=  ;;
 esac
 # }}}
 # {{{ Loading status ---------------------------------------------------------
@@ -29,38 +30,38 @@ esac
 : ${DEBUG_LOCAL_HOOKS:=0}
 
 sh_load_status () {
-  # Find the name of the running shell
-  _this_shell=${shell:-${0##*/}}
+    # Find the name of the running shell
+    _this_shell=${shell:-${0##*/}}
 
-  # Find the filename of the running script
-  if [ -n "$BASH_SOURCE" ]; then
-    _this_script="${BASH_SOURCE[0]}"
-    # Deduct 1 because array starts at 0, and another 1 because
-    # we want to ignore this stack frame (inside sh_load_status)
-    _this_script="${BASH_SOURCE[$(( ${#BASH_SOURCE[@]} - 2))]}"
-    # Sheesh.  $ZSH_SOURCE[-2], anyone?
-  else
-    _this_script="$0"
-    # Unfortunately in zsh there seems to be no way of determining
-    # the currently running file if a function is being run, unless
-    # function_argzero is unset :-/
-    [ "$_this_script" = sh_load_status ] && _this_script=
-    [ "$_this_script" = -zsh ] && _this_script=
-  fi
-  [ -n "$_this_script" ] && _this_script="[$_this_script]"
+    # Find the filename of the running script
+    if [ -n "$BASH_SOURCE" ]; then
+        _this_script="${BASH_SOURCE[0]}"
+        # Deduct 1 because array starts at 0, and another 1 because
+        # we want to ignore this stack frame (inside sh_load_status)
+        _this_script="${BASH_SOURCE[$(( ${#BASH_SOURCE[@]} - 2))]}"
+        # Sheesh.  $ZSH_SOURCE[-2], anyone?
+    else
+        _this_script="$0"
+        # Unfortunately in zsh there seems to be no way of determining
+        # the currently running file if a function is being run, unless
+        # function_argzero is unset :-/
+        [ "$_this_script" = sh_load_status ] && _this_script=
+        [ "$_this_script" = -zsh ] && _this_script=
+    fi
+    [ -n "$_this_script" ] && _this_script="[$_this_script]"
 
-  # Leave status printed?
-  
-  if [ "$DEBUG_LOCAL_HOOKS" -ge 2 ]; then
-    debug="\n"
-  fi
-  
-  # \e[0K is clear to right
-  if [ -n "$shell_interactive" ] && [ "$TERM" != 'dumb' ]; then
-    _text="${_this_shell}${_this_script}: $*... "
-    _text="${_text//\/home\//~}"
-    echo -e -n "\r\e[0K$_text$debug"
-  fi
+    # Leave status printed?
+
+    if [ "$DEBUG_LOCAL_HOOKS" -ge 2 ]; then
+        debug="\n"
+    fi
+
+    # \e[0K is clear to right
+    if [ -n "$shell_interactive" ] && [ "$TERM" != 'dumb' ]; then
+        _text="${_this_shell}${_this_script}: $*... "
+        _text="${_text//\/home\//~}"
+        echo -e -n "\r\e[0K$_text$debug"
+    fi
 }
 # }}}
 # {{{ Message(s) --------------------------------------------------------------
@@ -99,7 +100,7 @@ fi
 export ZDOTDIRPATH ZDOTDIRREVPATH
 # }}}
 
-# Default but… anyway
+# Set XDG_CONFIG_HOME as default
 export XDG_CONFIG_HOME=$HOME/.config
 
 # Load shenv hooks (if present)
@@ -112,60 +113,14 @@ USER=${USERNAME:-`id -un`}
 : ${USERNAME:=$USER}
 export USER USERNAME
 # }}}
-# {{{ PATH -------------------------------------------------------------------
-# Save system-wid PATH for reference, but should we trust it ?
-#syspath=$HOME/.syspath.$HOST
-#if ! test -e $syspath; then
-#    echo "$PATH" 2>/dev/null > "$syspath"
-#fi
-# Setting a fairly portable PATH
-#PATH=/usr/local/bin:/usr/X11R6/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/games:/usr/games:/usr/local/git/bin:/opt/java/bin
-# Build PATH with common bin folders
-#. $ZDOTDIR/.sh/functions/enable_wordsplit
-#newpaths=
-#for dir in $ZDOTDIRREVPATH; do
-#    for newpath in                          \
-#                    $dir/sbin               \
-#                    $dir/bin                \
-#                    $dir/bin/$OSTYPE        \
-#                    $dir/sbin               \
-#                    $dir/pkg/bin            \
-#                    $dir/usr/bin            \
-#                    $dir/usr/sbin            \
-#    ; do
-#        if test -d $newpath; then
-#            if test -z "$newpaths"; then
-#                newpaths=$newpath
-#            else
-#                newpaths=$newpaths:$newpath
-#            fi
-#        fi
-#    done
-#done
-#restore_wordsplit
-#PATH=$newpaths:$PATH
-#if test -d /usr/bin/core_perl; then
-#    PATH=$PATH:/usr/bin/core_perl/
-#fi
-#if test -d $HOME/.local/bin; then
-#    PATH=$PATH:$HOME/.local/bin
-#fi
-# }}}
-# {{{ MANPATH --------------------------------------------------------------- #
-export MANPATH=$HOME/share/man:$HOME/usr/share/man:/usr/share/man:$MANPATH
-# }}}
 # {{{ LANG -------------------------------------------------------------------
 # I am french but I like using my software in English :
 # We are going to set LANG=fr and LC_MESSAGES=en.
-# This way the local setting are french (currency, etc…) but the messages are 
+# This way the local setting are french (currency, etc…) but the messages are
 # in English.
-if test "$(uname)" != "Darwin"; then
-    export LANG=fr_FR.utf8
-    export LC_ALL=en_US.utf8
-    export LC_MESSAGES=en_US.utf8
-fi
-# FIXME LANGUAGE seems to be the same as LC_MESSAGES. to confirm.
-# FIXME What about darwin stuff ?
+export LANG=fr_FR.utf8
+export LC_ALL=en_US.utf8
+export LC_MESSAGES=en_US.utf8
 # }}}
 # Export IM methods for making firefox & co taking XCompose into account
 export GTK_IM_MODULE=xim
@@ -178,16 +133,8 @@ command -v vim >/dev/null && {
 command -v emacs >/dev/null && {
     export EDITOR=emacs
 }
-command -v emacs >/dev/null && {
-    export EDITOR="emacsclient"
-    export ALTERNATE_EDITOR=""
-}
-# Prefer iceweasel as browser
-command -v iceweasel >/dev/null && {
-    export BROWSER=iceweasel
-}
 # But if not present, prefer firefox (Ubuntu for ex.)
-test -z "$BROWSER" && command -v firefox >/dev/null && {
+command -v firefox >/dev/null && {
     export BROWSER=firefox
 }
 # }}}

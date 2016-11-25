@@ -1,3 +1,4 @@
+# -*- mode: sh; -*-
 # Filename:     .zshenv
 # Authors:      Vincent Demeester
 # License:      This file is licensed under the GPL v2.
