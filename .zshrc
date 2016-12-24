@@ -463,6 +463,10 @@ command -v xdg-user-dir >/dev/null && {
 }
 # }}}
 # }}}
+
+# If direnv is here, use it
+command -v direnv >/dev/null && eval "$(direnv hook zsh)"
+
 # Load zshrc.d
 . $ZDOT_RUN_HOOKS .sh/hook/zshrc.post
 
