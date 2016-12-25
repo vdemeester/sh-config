@@ -134,8 +134,8 @@ _vde_setprompt () {
     #'$(_vde_add_rprompt)'%(!.${PR_RED}#.${PR_LIGHT_GREEN}%%)$PR_NO_COLOUR '
 
     PROMPT='$BG_PR_WHITE$PR_LIGHT_GREY%(!.%n@%m.$PR_LIGHT_GREEN)${SSH_TTY:+$BG_PR_WHITE$PR_LIGHT_GREY %n@%m }\
-$PR_WHITE$BG_PR_GREY $PR_LIGHT_WHITE%$PR_PWDLEN<...<%~%<< $PR_NO_COLOUR'$(_vde_add_lprompt)'
-'$(_vde_add_rprompt)'%(!.${PR_RED}#.${PR_LIGHT_BLUE}λ)$PR_NO_COLOUR '
+$PR_WHITE$BG_PR_GREY$PR_LIGHT_WHITE%$PR_PWDLEN<...<%~%<< $PR_NO_COLOUR'$(_vde_add_lprompt)'
+'$(_vde_add_rprompt)'%(!.${PR_RED}#.${PR_WHITE}λ)$PR_NO_COLOUR '
 
     # display exitcode on the right when >0
     if is-at-least 4.3.4 && [[ -o multibyte ]]; then
