@@ -118,13 +118,9 @@ export USER USERNAME
 # We are going to set LANG=fr and LC_MESSAGES=en.
 # This way the local setting are french (currency, etc…) but the messages are
 # in English.
-if test `uname` = "Darwin"; then
-    export LANG=en_US.utf8
-else
-    export LANG=fr_FR.utf8
-fi
-export LC_ALL=en_US.utf8
-export LC_MESSAGES=en_US.utf8
+export LANG=fr_FR.utf-8
+export LC_ALL=en_US.utf-8
+export LC_MESSAGES=en_US.utf-8
 # }}}
 # Export IM methods for making firefox & co taking XCompose into account
 export GTK_IM_MODULE=xim
