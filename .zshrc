@@ -461,6 +461,13 @@ command -v xdg-user-dir >/dev/null && {
 # }}}
 # }}}
 
+# set MAKEFLAGS
+if type nproc &>/dev/null; then   # GNU/Linux
+  export MAKEFLAGS="$MAKEFLAGS -j$(($(nproc)-1))"
+elif type sysctl -n hw.ncpu &>/dev/null; then   # macOS, FreeBSD
+  export MAKEFLAGS="$MAKEFLAGS -j$(($(sysctl -n hw.ncpu)-1))"
+fi
+
 # If direnv is here, use it
 command -v direnv >/dev/null && eval "$(direnv hook zsh)"
 
