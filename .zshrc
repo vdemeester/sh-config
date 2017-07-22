@@ -427,28 +427,24 @@ alias -g EA9="|& awk '{print \$9}'"
 # }}}
 # {{{ HASHES -----------------------------------------------------------------
 hash -d sh=$HOME/.sh
-hash -d gh=$HOME/src/github
-hash -d exercism=$HOME/src/exercism
-hash -d configs=$HOME/src/configs
-hash -d nix=$HOME/src/nix
+hash -d gh=$HOME/src/github.com
+hash -d exercism=$HOME/src/github.com/vdemeester/exercisms
+hash -d nixos=$HOME/src/github.com/NixOS
 hash -d sites=$HOME/src/sites
-hash -d go=$HOME/go/src
-hash -d docker=$HOME/go/src/github.com/docker
-hash -d moby=$HOME/go/src/github.com/moby
-hash -d linuxkit=$HOME/go/src/github.com/linuxkit
-hash -d containerd=$HOME/go/src/github.com/containerd
-hash -d opencontainers=$HOME/go/src/github.com/opencontainers
-hash -d vdemeester=$HOME/go/src/github.com/vdemeester
-hash -d containous=$HOME/go/src/github.com/containous
-hash -d dnephin=$HOME/go/src/github.com/dnephin
-hash -d libkermit=$HOME/go/src/github.com/libkermit
+hash -d docker=$HOME/src/github.com/docker
+hash -d moby=$HOME/src/github.com/moby
+hash -d linuxkit=$HOME/src/github.com/linuxkit
+hash -d containerd=$HOME/src/github.com/containerd
+hash -d opencontainers=$HOME/src/github.com/opencontainers
+hash -d vdemeester=$HOME/src/github.com/vdemeester
+hash -d containous=$HOME/src/github.com/containous
+hash -d dnephin=$HOME/src/github.com/dnephin
+hash -d libkermit=$HOME/src/github.com/libkermit
 hash -d experiments=$HOME/src/experiments
 # few more default dirs {{{
 command -v xdg-user-dir >/dev/null && {
     hash -d docs=$(xdg-user-dir DOCUMENTS)
     hash -d org=$(xdg-user-dir DESKTOP)/org
-    hash -d notes=$(xdg-user-dir DESKTOP)/org/notes
-    hash -d todos=$(xdg-user-dir DESKTOP)/org/todos
     hash -d pics=$(xdg-user-dir PICTURES)
     hash -d pictures=$(xdg-user-dir PICTURES)
     hash -d downloads=$(xdg-user-dir DOWNLOAD)
